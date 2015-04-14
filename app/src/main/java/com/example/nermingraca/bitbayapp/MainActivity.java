@@ -93,10 +93,10 @@ public class MainActivity extends ActionBarActivity {
                     JSONObject user = new JSONObject(responseJson);
                     int id = user.getInt("id");
                     if(id > 0){
-                        String username = user.getString("name");
+                     //   String username = user.getString("name");
                         UserData userData = UserData.getInstance();
                         userData.setId(id);
-                        userData.setUsername(username);
+                    //    userData.setUsername(username);
                         saveUserCredentials();
                         goToProducts();
                     }
