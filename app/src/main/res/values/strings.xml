@@ -11,8 +11,8 @@
     <string name="button_login_label">Login</string>
 
     <!-- keys -->
-    <string name="key_user_email">bitcamp.benjamin.service.user_email</string>
-    <string name="key_user_password">bitcamp.benjamin.service.user_password</string>
+    <string name="key_user_email">bitcamp.nermin.service.user_email</string>
+    <string name="key_user_password">bitcamp.nermin.service.user_password</string>
 
     <!-- Toast -->
     <string name="toast_try_again">Something went wrong! Try again</string>
@@ -28,5 +28,6 @@
     <!-- services -->
     <string name="service_products">http://10.0.2.2:9000/api/allproducts</string>
     <string name="service_login">http://10.0.2.2:9000/api/login</string>
+    <string name="title_activity_product">ProductActivity</string>
 
 </resources>

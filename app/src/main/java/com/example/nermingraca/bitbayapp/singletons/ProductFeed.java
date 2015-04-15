@@ -2,7 +2,7 @@ package com.example.nermingraca.bitbayapp.singletons;
 
 import android.util.Log;
 
-import com.example.nermingraca.bitbayapp.Product;
+import com.example.nermingraca.bitbayapp.models.Product;
 import com.example.nermingraca.bitbayapp.ServiceRequest;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
@@ -52,12 +52,13 @@ public class ProductFeed {
                 try {
                     JSONArray array = new JSONArray(response.body().string());
                     for(int i = 0; i < array.length(); i++){
-                        JSONObject postObj = array.getJSONObject(i);
-                        Log.d("RESPONSE", postObj.toString());
-                        int id = postObj.getInt("id");
-                        String name = postObj.getString("name");
-                        double price = postObj.getDouble("price");
-                        mFeed.add(new Product(id, name, price));
+                        JSONObject productObj = array.getJSONObject(i);
+                        Log.d("RESPONSE", productObj.toString());
+                        int id = productObj.getInt("id");
+                        String name = productObj.getString("name");
+                        double price = productObj.getDouble("price");
+                        String description = productObj.getString("description");
+                        mFeed.add(new Product(id, name, price, description));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
