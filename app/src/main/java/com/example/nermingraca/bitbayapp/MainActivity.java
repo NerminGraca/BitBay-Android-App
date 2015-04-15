@@ -3,110 +3,151 @@ package com.example.nermingraca.bitbayapp;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.nermingraca.bitbayapp.singletons.UserData;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
 
 public class MainActivity extends ActionBarActivity {
 
-    private Button mLogin;
-    private static final String TAG = "bitbay.se.main_activity";
+    private SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        mSharedPreferences = getPreferences(Context.MODE_PRIVATE);
 
-        String email = sharedPref.getString(
-                getString(R.string.user_email_key), null);
 
-        String password = sharedPref.getString(
-                getString(R.string.user_password_key), null);
+        String email = mSharedPreferences.getString(
+                getString(R.string.key_user_email),
+                null
+        );
+
+        String password = mSharedPreferences.getString(
+                getString(R.string.key_user_password),
+                null
+        );
 
         if(email != null && password != null){
-            sendLogin(email, password);
-
-            //TODO
-            //Send user to other activity
+            setUserData(email, password);
+            loginUser();
         }
 
-        mLogin = (Button) findViewById(R.id.button_login);
-        mLogin.setOnClickListener(new View.OnClickListener() {
+        final EditText editEmail = (EditText) findViewById(R.id.edit_text_email);
+        final EditText editPassword = (EditText)findViewById(R.id.edit_text_password);
+
+        Button buttonLogin = (Button) findViewById(R.id.button_login);
+
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText emailEdit = (EditText) findViewById(R.id.edit_text_email);
-                EditText passwordEdit = (EditText) findViewById(R.id.edit_text_password);
+                String email = editEmail.getText().toString();
+                String password = editPassword.getText().toString();
 
-                String email = emailEdit.getText().toString();
-                String password = passwordEdit.getText().toString();
-
-                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPref.edit();
-
-                editor.putString(getString(R.string.user_email_key), email);
-                editor.putString(getString(R.string.user_password_key), password);
-                editor.commit();
-
-                sendLogin(email, password);
-
-
+                setUserData(email, password);
+                loginUser();
             }
         });
+
+
     }
 
-    private void sendLogin(String email, String password){
-        String url = "http://10.0.2.2:9000/api/login";
-        String json = String.format("{ " +
-                " \"email\" : \"%s\", " +
-                " \"password\": \"%s\" " +
-                " }", email, password);
+    private void loginUser(){
+        String url = getString(R.string.service_login);
+        Callback callback = loginVerification();
+        String json = UserData.getInstance().toJson();
 
-        Log.e(TAG, json);
-
-        PostRequest.post(
-                url,
-                json,
-                logResponse()
-        );
+        ServiceRequest.post(url, json, callback);
     }
 
-    private Callback logResponse(){
+    private Callback loginVerification(){
         return new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                Log.d(TAG, request.toString());
-                Log.d(TAG, e.getMessage());
-                Log.d(TAG, "Failed");
+                makeToast(R.string.toast_try_again);
             }
 
             @Override
             public void onResponse(Response response) throws IOException {
-                Log.d(TAG, response.body().string());
-                Log.d(TAG, response.message().toString());
-                Log.d(TAG, "Worked");
-                goToPost();
+                String responseJson = response.body().string();
+                try {
+                    JSONObject user = new JSONObject(responseJson);
+                    int id = user.getInt("id");
+                    if(id > 0){
+                     //   String username = user.getString("name");
+                        UserData userData = UserData.getInstance();
+                        userData.setId(id);
+                    //    userData.setUsername(username);
+                        saveUserCredentials();
+                        goToProducts();
+                    }
+                } catch (JSONException e) {
+                    makeToast(R.string.toast_try_again);
+                    e.printStackTrace();
+                }
             }
         };
     }
 
-    private void goToPost()
-    {
-        Intent postInt = new Intent(this, ShowProducts.class);
-        startActivity(postInt);
+    private void saveUserCredentials(){
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+
+        UserData userData = UserData.getInstance();
+
+        editor.putString(
+                getString(R.string.key_user_email),
+                userData.getEmail()
+        );
+
+        editor.putString(
+                getString(R.string.key_user_password),
+                userData.getPassword()
+        );
+        editor.commit();
+    }
+
+    private void makeToast(final int messageId){
+
+        new Handler(Looper.getMainLooper())
+                .post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this,
+                                messageId,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
+    private void goToProducts(){
+        Intent posts = new Intent(this, ShowProducts.class);
+        startActivity(posts);
+    }
+
+    private void setUserData(String email, String password){
+        UserData userData = UserData.getInstance();
+        userData.setEmail(email);
+        userData.setPassword(password);
     }
 
 
