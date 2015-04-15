@@ -1,15 +1,19 @@
 package com.example.nermingraca.bitbayapp;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.nermingraca.bitbayapp.models.Product;
 import com.example.nermingraca.bitbayapp.singletons.ProductFeed;
 
 
@@ -34,6 +38,20 @@ public class ShowProducts extends ActionBarActivity {
 
         );
         mProductList.setAdapter(listAdapter);
+
+        mProductList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Product clicked = (Product)parent.getItemAtPosition(position);
+                Intent intent = new Intent(ShowProducts.this, ProductActivity.class);
+                intent.putExtra("id", clicked.getmId());
+                intent.putExtra("name", clicked.getmName());
+                intent.putExtra("description", clicked.getmDescription());
+                intent.putExtra("price", String.valueOf(clicked.getmPrice()));
+                startActivity(intent);
+            }
+        });
+
 
         mFilter = (EditText)findViewById(R.id.edit_text_filter);
         mFilter.addTextChangedListener(new TextWatcher() {
