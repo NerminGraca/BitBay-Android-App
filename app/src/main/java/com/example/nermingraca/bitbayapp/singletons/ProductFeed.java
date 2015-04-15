@@ -53,6 +53,7 @@ public class ProductFeed {
                     JSONArray array = new JSONArray(response.body().string());
                     for(int i = 0; i < array.length(); i++){
                         JSONObject postObj = array.getJSONObject(i);
+                        Log.d("RESPONSE", postObj.toString());
                         int id = postObj.getInt("id");
                         String name = postObj.getString("name");
                         double price = postObj.getDouble("price");
