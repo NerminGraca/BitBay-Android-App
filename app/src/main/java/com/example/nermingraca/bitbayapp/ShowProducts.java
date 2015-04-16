@@ -47,7 +47,9 @@ public class ShowProducts extends ActionBarActivity {
                 intent.putExtra("id", clicked.getmId());
                 intent.putExtra("name", clicked.getmName());
                 intent.putExtra("description", clicked.getmDescription());
-                intent.putExtra("price", String.valueOf(clicked.getmPrice()));
+                double priceDouble = clicked.getmPrice();
+                String price = String.format( "$" + "%.2f", priceDouble );
+                intent.putExtra("price", price);
                 startActivity(intent);
             }
         });
