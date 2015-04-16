@@ -17,7 +17,7 @@
     <!-- Toast -->
     <string name="toast_try_again">Something went wrong! Try again</string>
 
-    <string name="default_email">mustafa@gmail.com</string>
+    <string name="default_email">mustafa.ademovic93@gmail.com</string>
     <string name="default_password">123456</string>
 
     <string name="user_email_key">bitcamp.services.user_email</string>
