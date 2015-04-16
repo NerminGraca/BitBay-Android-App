@@ -49,6 +49,9 @@ public class ProductFeed {
 
             @Override
             public void onResponse(Response response) throws IOException {
+                if(mFeed.size() > 0) {
+                    mFeed.clear();
+                }
                 try {
                     JSONArray array = new JSONArray(response.body().string());
                     for(int i = 0; i < array.length(); i++){

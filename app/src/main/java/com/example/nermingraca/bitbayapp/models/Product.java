@@ -19,8 +19,9 @@ public class Product {
 
     @Override
     public String toString() {
+        String price = String.format( "%.2f", mPrice );
         return "Name: " + mName + '\n' +
-               "Price: " + mPrice;
+               "Price: $" + price;
     }
 
     public int getmId() {
