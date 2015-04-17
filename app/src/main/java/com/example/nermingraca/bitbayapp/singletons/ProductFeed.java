@@ -3,7 +3,7 @@ package com.example.nermingraca.bitbayapp.singletons;
 import android.util.Log;
 
 import com.example.nermingraca.bitbayapp.models.Product;
-import com.example.nermingraca.bitbayapp.ServiceRequest;
+import com.example.nermingraca.bitbayapp.service.ServiceRequest;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;

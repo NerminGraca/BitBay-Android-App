@@ -1,4 +1,4 @@
-package com.example.nermingraca.bitbayapp;
+package com.example.nermingraca.bitbayapp.service;
 
 import com.example.nermingraca.bitbayapp.singletons.UserData;
 import com.squareup.okhttp.Call;

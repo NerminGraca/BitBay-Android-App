@@ -1,5 +1,6 @@
 package com.example.nermingraca.bitbayapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,10 +12,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ListView;
 
 import com.example.nermingraca.bitbayapp.models.Product;
 import com.example.nermingraca.bitbayapp.singletons.ProductFeed;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ShowProducts extends ActionBarActivity {
@@ -31,13 +36,14 @@ public class ShowProducts extends ActionBarActivity {
         productFeed.getFeed(getString(R.string.service_products));
 
         mProductList = (ListView)findViewById(R.id.list_view_posts);
-        ArrayAdapter<Product> listAdapter = new ArrayAdapter<Product>(
+        ProductsAdapter productsAdapter = new ProductsAdapter (
                 this,
                 android.R.layout.simple_list_item_1,
-                productFeed.getFeed()
+                (ArrayList<Product>)productFeed.getFeed()
 
         );
-        mProductList.setAdapter(listAdapter);
+
+        mProductList.setAdapter(productsAdapter);
 
         mProductList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -72,6 +78,78 @@ public class ShowProducts extends ActionBarActivity {
 
             }
         });
+    }
+
+    private class ProductsAdapter extends ArrayAdapter<Product> {
+
+        private ArrayList<Product> mListToShow;
+        private Filter mFilter;
+
+        private ProductsAdapter(Context context, int resource, ArrayList<Product> origin) {
+            super(context, resource);
+            mListToShow = origin;
+        }
+
+        @Override
+        public Filter getFilter(){
+            if(mFilter == null) {
+                mFilter = new PostsFilter();
+            }
+            return mFilter;
+        }
+
+        @Override
+        public int getCount() {
+            if (mListToShow != null) {
+                return mListToShow.size();
+            } else {
+                return 0;
+            }
+
+        }
+
+        @Override
+        public Product getItem(int position){
+            return mListToShow.get(position);
+        }
+
+        private class PostsFilter extends Filter {
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+
+                FilterResults results = new FilterResults();
+
+                if(constraint == null || constraint.length() == 0) {
+                    List<Product> origin = ProductFeed.getInstance().getFeed();
+                    results.values = origin;
+                    results.count = origin.size();
+                } else {
+                    String searchString = constraint.toString().toLowerCase();
+                    ArrayList<Product> filteredList = new ArrayList<Product>();
+                    for(int i = 0; i < mListToShow.size(); i++) {
+                        Product p = mListToShow.get(i);
+                        String postTitle = p.getmName().toLowerCase();
+
+                        if(postTitle.contains(searchString)) {
+                            filteredList.add(p);
+                        }
+                        results.values = filteredList;
+                        results.count = filteredList.size();
+                    }
+                }
+
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                if(results.values != null) {
+                    mListToShow = (ArrayList<Product>)results.values;
+                    notifyDataSetChanged();
+                }
+            }
+        }
     }
 
 
