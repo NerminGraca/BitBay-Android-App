@@ -36,7 +36,8 @@ public class ShowProducts extends ActionBarActivity {
         productFeed.getFeed(getString(R.string.service_products));
 
         mProductList = (ListView)findViewById(R.id.list);
-        CustomListAdapter productsAdapter = new CustomListAdapter(this, (List<Product>)productFeed.getFeed());
+        CustomListAdapter productsAdapter = new CustomListAdapter
+                (this, (List<Product>)productFeed.getFeed());
 
         mProductList.setAdapter(productsAdapter);
 
@@ -48,6 +49,7 @@ public class ShowProducts extends ActionBarActivity {
                 intent.putExtra("id", clicked.getmId());
                 intent.putExtra("name", clicked.getmName());
                 intent.putExtra("description", clicked.getmDescription());
+                intent.putExtra("imagePath", clicked.getThumbnailUrl());
                 double priceDouble = clicked.getmPrice();
                 String price = String.format( "$" + "%.2f", priceDouble );
                 intent.putExtra("price", price);

@@ -9,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 
 public class ProductActivity extends ActionBarActivity {
 
@@ -22,15 +24,16 @@ public class ProductActivity extends ActionBarActivity {
         String name = intent.getStringExtra("name");
         String description = intent.getStringExtra("description");
         String price = intent.getStringExtra("price");
-
+        String imagePath = intent.getStringExtra("imagePath");
 
         TextView productName = (TextView) findViewById(R.id.productName);
         TextView productDesc = (TextView) findViewById(R.id.productDesc);
         TextView productPrice = (TextView) findViewById(R.id.productPrice);
+        ImageView productImage = (ImageView) findViewById(R.id.productImage);
         productName.setText(name);
         productDesc.setText(description);
         productPrice.setText(price);
-
+        Picasso.with(getBaseContext()).load(imagePath).into(productImage);
     }
 
 
