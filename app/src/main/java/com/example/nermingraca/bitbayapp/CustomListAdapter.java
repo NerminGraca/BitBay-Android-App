@@ -1,5 +1,6 @@
 package com.example.nermingraca.bitbayapp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -8,11 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.example.nermingraca.bitbayapp.models.Product;
+import com.example.nermingraca.bitbayapp.singletons.ProductFeed;
 
 /**
  * Created by nermingraca on 17/04/15.
@@ -22,6 +25,8 @@ public class CustomListAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private List<Product> productItems;
     ImageLoader imageLoader = AppController.getInstance().getImageLoader();
+
+    private Filter mFilter;
 
     public CustomListAdapter(Activity activity, List<Product> productItems) {
         this.activity = activity;
@@ -82,6 +87,51 @@ public class CustomListAdapter extends BaseAdapter {
         year.setText("Seller: " + String.valueOf(product.getmOwner()));
 
         return convertView;
+    }
+
+    public Filter getFilter(){
+        if(mFilter == null) {
+            mFilter = new ProductsFilter();
+        }
+        return mFilter;
+    }
+
+    private class ProductsFilter extends Filter {
+
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            FilterResults results = new FilterResults();
+
+            if(constraint == null || constraint.length() == 0) {
+                List<Product> origin = ProductFeed.getInstance().getFeed();
+                results.values = origin;
+                results.count = origin.size();
+            } else {
+                String searchString = constraint.toString().toLowerCase();
+                ArrayList<Product> filteredList = new ArrayList<Product>();
+                for(int i = 0; i < productItems.size(); i++) {
+                    Product p = productItems.get(i);
+                    String postTitle = p.getmName().toLowerCase();
+
+                    if(postTitle.contains(searchString)) {
+                        filteredList.add(p);
+                    }
+                    results.values = filteredList;
+                    results.count = filteredList.size();
+                }
+            }
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            if(results.values != null) {
+                productItems = (ArrayList<Product>)results.values;
+                notifyDataSetChanged();
+            }
+        }
     }
 
 }
