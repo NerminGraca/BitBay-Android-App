@@ -9,12 +9,17 @@ public class Product {
     private String mName;
     private double mPrice;
     private String mDescription;
+    private String mOwner;
+    private String thumbnailUrl;
 
-    public Product(int mId, String mName, double mPrice, String mDescription) {
+    public Product(int mId, String mName, double mPrice, String mDescription,
+                   String mOwner, String thumbnailUrl) {
         this.mId = mId;
         this.mName = mName;
         this.mPrice = mPrice;
         this.mDescription = mDescription;
+        this.mOwner = mOwner;
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     @Override
@@ -54,5 +59,21 @@ public class Product {
 
     public void setmDescription(String mDescription) {
         this.mDescription = mDescription;
+    }
+
+    public String getmOwner() {
+        return mOwner;
+    }
+
+    public void setmOwner(String mOwner) {
+        this.mOwner = mOwner;
+    }
+
+    public String getThumbnailUrl() {
+        return "http://10.0.2.2:9000" + "/assets/" + thumbnailUrl;
+    }
+
+    public void setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
     }
 }

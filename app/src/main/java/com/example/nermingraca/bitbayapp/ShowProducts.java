@@ -35,13 +35,8 @@ public class ShowProducts extends ActionBarActivity {
         ProductFeed productFeed = ProductFeed.getInstance();
         productFeed.getFeed(getString(R.string.service_products));
 
-        mProductList = (ListView)findViewById(R.id.list_view_posts);
-        ProductsAdapter productsAdapter = new ProductsAdapter (
-                this,
-                android.R.layout.simple_list_item_1,
-                (ArrayList<Product>)productFeed.getFeed()
-
-        );
+        mProductList = (ListView)findViewById(R.id.list);
+        CustomListAdapter productsAdapter = new CustomListAdapter(this, (List<Product>)productFeed.getFeed());
 
         mProductList.setAdapter(productsAdapter);
 

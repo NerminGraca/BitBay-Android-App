@@ -16,9 +16,12 @@
         android:id="@+id/edit_text_filter"/>
 
     <ListView
+        android:id="@+id/list"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/list_view_posts"
+        android:layout_height="wrap_content"
+        android:divider="@color/list_divider"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/list_row_selector"
         >
 
     </ListView>
