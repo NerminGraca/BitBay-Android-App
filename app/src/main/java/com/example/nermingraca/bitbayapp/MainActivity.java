@@ -94,15 +94,13 @@ public class MainActivity extends ActionBarActivity {
                     JSONObject user = new JSONObject(responseJson);
                     int id = user.getInt("id");
                     if(id > 0){
-                     //   String username = user.getString("name");
                         UserData userData = UserData.getInstance();
                         userData.setId(id);
-                    //    userData.setUsername(username);
                         saveUserCredentials();
                         goToProducts();
                     }
                 } catch (JSONException e) {
-                    makeToast(R.string.toast_try_again);
+                    makeToast(R.string.toast_login_error);
                     e.printStackTrace();
                 }
             }

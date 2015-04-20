@@ -16,6 +16,7 @@
 
     <!-- Toast -->
     <string name="toast_try_again">Something went wrong! Try again</string>
+    <string name="toast_login_error">Username or password wrong! Please try again.</string>
 
     <string name="default_email">mustafa.ademovic93@gmail.com</string>
     <string name="default_password">123456</string>
