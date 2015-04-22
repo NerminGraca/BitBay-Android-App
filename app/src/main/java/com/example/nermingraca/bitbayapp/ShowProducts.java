@@ -16,6 +16,7 @@ import android.widget.Filter;
 import android.widget.ListView;
 
 import com.example.nermingraca.bitbayapp.models.Product;
+import com.example.nermingraca.bitbayapp.models.User;
 import com.example.nermingraca.bitbayapp.singletons.ProductFeed;
 
 import java.util.ArrayList;
@@ -104,6 +105,15 @@ public class ShowProducts extends ActionBarActivity {
             moveTaskToBack(true);
             Intent toLogin = new Intent( ShowProducts.this, MainActivity.class);
             startActivity(toLogin);
+            return true;
+        }
+
+        if (id == R.id.profile_action) {
+            User user = ProfileActivity.getCurrentUser();
+            Intent intent = new Intent(ShowProducts.this, ProfileActivity.class);
+            intent.putExtra("username", user.getmUsername());
+            intent.putExtra("email", user.getmEmail());
+            startActivity(intent);
             return true;
         }
 

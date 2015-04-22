@@ -5,46 +5,44 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nermingraca.bitbayapp.models.User;
-import com.squareup.picasso.Picasso;
+import com.example.nermingraca.bitbayapp.singletons.UserData;
+import com.example.nermingraca.bitbayapp.singletons.UserFeed;
 
 
-public class ProductActivity extends ActionBarActivity {
+public class ProfileActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product);
+        setContentView(R.layout.activity_profile);
 
         Intent intent = getIntent();
-        int id = intent.getIntExtra("id", 0);
-        String name = intent.getStringExtra("name");
-        String description = intent.getStringExtra("description");
-        String price = intent.getStringExtra("price");
-        String imagePath = intent.getStringExtra("imagePath");
-        String seller = intent.getStringExtra("seller");
+        String username = intent.getStringExtra("username");
+        String email = intent.getStringExtra("email");
 
-        TextView productName = (TextView) findViewById(R.id.productName);
-        TextView productDesc = (TextView) findViewById(R.id.productDesc);
-        TextView productPrice = (TextView) findViewById(R.id.productPrice);
-        ImageView productImage = (ImageView) findViewById(R.id.productImage);
-        TextView productSeller = (TextView) findViewById(R.id.productSeller);
-        productName.setText(name);
-        productDesc.setText(description);
-        productPrice.setText(price);
-        Picasso.with(getBaseContext()).load(imagePath).into(productImage);
-        productSeller.setText(seller);
+        TextView usernameV = (TextView) findViewById(R.id.tvUsername);
+        TextView emailV = (TextView) findViewById(R.id.tvEmail);
+
+        usernameV.setText(username);
+        emailV.setText(email);
+    }
+
+    public static User getCurrentUser() {
+        int id = UserData.getInstance().getId();
+        String url = String.format("http://10.0.2.2:9000/api/showuser/%d", id);
+
+        UserFeed userFeed = UserFeed.getInstance();
+        return userFeed.getFeed(url);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_product, menu);
+        getMenuInflater().inflate(R.menu.menu_profile, menu);
         return true;
     }
 
@@ -63,14 +61,14 @@ public class ProductActivity extends ActionBarActivity {
         if (id == R.id.logout_action) {
             MainActivity.logout();
             moveTaskToBack(true);
-            Intent toLogin = new Intent( ProductActivity.this, MainActivity.class);
+            Intent toLogin = new Intent( ProfileActivity.this, MainActivity.class);
             startActivity(toLogin);
             return true;
         }
 
         if (id == R.id.profile_action) {
             User user = ProfileActivity.getCurrentUser();
-            Intent intent = new Intent(ProductActivity.this, ProfileActivity.class);
+            Intent intent = new Intent(ProfileActivity.this, ProfileActivity.class);
             intent.putExtra("username", user.getmUsername());
             intent.putExtra("email", user.getmEmail());
             startActivity(intent);

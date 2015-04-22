@@ -10,6 +10,7 @@
 
     <string name="button_login_label">Login</string>
     <string name="logout_label">Logout</string>
+    <string name="profile_label">Profile</string>
 
     <!-- keys -->
     <string name="key_user_email">bitcamp.nermin.service.user_email</string>
@@ -28,8 +29,12 @@
     <string name="title_activity_show_product">ShowProduct</string>
 
     <!-- services -->
+    <string name="service_user" formatted = "false">http://10.0.2.2:9000/api/showuser/%d</string>
     <string name="service_products">http://10.0.2.2:9000/api/allproducts</string>
     <string name="service_login">http://10.0.2.2:9000/api/login</string>
     <string name="title_activity_product">ProductActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>
