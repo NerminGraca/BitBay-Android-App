@@ -25,15 +25,18 @@ public class ProductActivity extends ActionBarActivity {
         String description = intent.getStringExtra("description");
         String price = intent.getStringExtra("price");
         String imagePath = intent.getStringExtra("imagePath");
+        String seller = intent.getStringExtra("seller");
 
         TextView productName = (TextView) findViewById(R.id.productName);
         TextView productDesc = (TextView) findViewById(R.id.productDesc);
         TextView productPrice = (TextView) findViewById(R.id.productPrice);
         ImageView productImage = (ImageView) findViewById(R.id.productImage);
+        TextView productSeller = (TextView) findViewById(R.id.productSeller);
         productName.setText(name);
         productDesc.setText(description);
         productPrice.setText(price);
         Picasso.with(getBaseContext()).load(imagePath).into(productImage);
+        productSeller.setText(seller);
     }
 
 

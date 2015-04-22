@@ -50,6 +50,7 @@ public class ShowProducts extends ActionBarActivity {
                 intent.putExtra("name", clicked.getmName());
                 intent.putExtra("description", clicked.getmDescription());
                 intent.putExtra("imagePath", clicked.getThumbnailUrl());
+                intent.putExtra("seller", clicked.getmOwner());
                 double priceDouble = clicked.getmPrice();
                 String price = String.format( "$" + "%.2f", priceDouble );
                 intent.putExtra("price", price);
