@@ -28,7 +28,7 @@ import java.io.IOException;
 
 public class MainActivity extends ActionBarActivity {
 
-    private SharedPreferences mSharedPreferences;
+    private static SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,6 +149,12 @@ public class MainActivity extends ActionBarActivity {
         userData.setPassword(password);
     }
 
+    public static void logout() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.clear();
+        editor.commit();
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -166,6 +172,11 @@ public class MainActivity extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+
+        if (id == R.id.logout_action) {
+            logout();
             return true;
         }
 

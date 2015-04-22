@@ -9,6 +9,7 @@
     <string name="filter_hint">Search by name</string>
 
     <string name="button_login_label">Login</string>
+    <string name="logout_label">Logout</string>
 
     <!-- keys -->
     <string name="key_user_email">bitcamp.nermin.service.user_email</string>

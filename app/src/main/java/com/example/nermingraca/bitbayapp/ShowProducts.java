@@ -99,6 +99,14 @@ public class ShowProducts extends ActionBarActivity {
             return true;
         }
 
+        if (id == R.id.logout_action) {
+            MainActivity.logout();
+            moveTaskToBack(true);
+            Intent toLogin = new Intent( ShowProducts.this, MainActivity.class);
+            startActivity(toLogin);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }
