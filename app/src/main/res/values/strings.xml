@@ -12,6 +12,12 @@
     <string name="logout_label">Logout</string>
     <string name="profile_label">Profile</string>
 
+    <string name="username_label">Username</string>
+    <string name="email_label">Email</string>
+    <string name="my_products_label">My products:</string>
+    <string name="sellers_products_label">Sellers products:</string>
+
+
     <!-- keys -->
     <string name="key_user_email">bitcamp.nermin.service.user_email</string>
     <string name="key_user_password">bitcamp.nermin.service.user_password</string>
@@ -31,6 +37,7 @@
     <string name="title_activity_show_product">Products</string>
     <string name="title_activity_product">Product</string>
     <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_seller">Seller</string>
 
     <!-- services -->
     <string name="service_user" formatted = "false">http://10.0.2.2:9000/api/showuser/%d</string>
@@ -38,5 +45,6 @@
     <string name="service_login">http://10.0.2.2:9000/api/login</string>
 
     <string name="hello_world">Hello world!</string>
+
 
 </resources>

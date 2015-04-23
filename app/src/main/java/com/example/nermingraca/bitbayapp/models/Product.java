@@ -11,15 +11,17 @@ public class Product {
     private String mDescription;
     private String mOwner;
     private String thumbnailUrl;
+    private int mSellerId;
 
     public Product(int mId, String mName, double mPrice, String mDescription,
-                   String mOwner, String thumbnailUrl) {
+                   String mOwner, String thumbnailUrl, int mSellerId) {
         this.mId = mId;
         this.mName = mName;
         this.mPrice = mPrice;
         this.mDescription = mDescription;
         this.mOwner = mOwner;
         this.thumbnailUrl = thumbnailUrl;
+        this.mSellerId = mSellerId;
     }
 
     @Override
@@ -75,5 +77,13 @@ public class Product {
 
     public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public int getmSellerId() {
+        return mSellerId;
+    }
+
+    public void setmSellerId(int mSellerId) {
+        this.mSellerId = mSellerId;
     }
 }

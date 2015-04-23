@@ -63,7 +63,8 @@ public class ProductFeed {
                         String description = productObj.getString("description");
                         String owner = productObj.getString("owner");
                         String imagePath = productObj.getString("productImagePath1");
-                        mFeed.add(new Product(id, name, price, description, owner, imagePath));
+                        int userId = productObj.getInt("ownerId");
+                        mFeed.add(new Product(id, name, price, description, owner, imagePath, userId));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
