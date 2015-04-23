@@ -5,6 +5,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -58,6 +60,23 @@ public class ProfileActivity extends ActionBarActivity {
                 (this, userProducts);
 
         mProfileProductList.setAdapter(productsAdapter);
+
+        mProfileProductList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Product clicked = (Product)parent.getItemAtPosition(position);
+                Intent intent = new Intent(ProfileActivity.this, ProductActivity.class);
+                intent.putExtra("id", clicked.getmId());
+                intent.putExtra("name", clicked.getmName());
+                intent.putExtra("description", clicked.getmDescription());
+                intent.putExtra("imagePath", clicked.getThumbnailUrl());
+                intent.putExtra("seller", clicked.getmOwner());
+                double priceDouble = clicked.getmPrice();
+                String price = String.format( "$" + "%.2f", priceDouble );
+                intent.putExtra("price", price);
+                startActivity(intent);
+            }
+        });
     }
 
     public static User getCurrentUser() {
@@ -98,6 +117,7 @@ public class ProfileActivity extends ActionBarActivity {
 
         if (id == R.id.profile_action) {
             User user = ProfileActivity.getCurrentUser();
+            moveTaskToBack(true);
             Intent intent = new Intent(ProfileActivity.this, ProfileActivity.class);
             intent.putExtra("username", user.getmUsername());
             intent.putExtra("email", user.getmEmail());

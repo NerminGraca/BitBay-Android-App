@@ -110,6 +110,7 @@ public class ShowProducts extends ActionBarActivity {
 
         if (id == R.id.profile_action) {
             User user = ProfileActivity.getCurrentUser();
+            moveTaskToBack(true);
             Intent intent = new Intent(ShowProducts.this, ProfileActivity.class);
             intent.putExtra("username", user.getmUsername());
             intent.putExtra("email", user.getmEmail());
