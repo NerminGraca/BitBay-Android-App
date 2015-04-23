@@ -25,15 +25,17 @@
 
     <string name="user_email_key">bitcamp.services.user_email</string>
     <string name="user_password_key">bitcamp.services.user_password</string>
+
+    <!-- activity names -->
     <string name="title_activity_send_post">SendPostActivity</string>
-    <string name="title_activity_show_product">ShowProduct</string>
+    <string name="title_activity_show_product">Products</string>
+    <string name="title_activity_product">Product</string>
+    <string name="title_activity_profile">Profile</string>
 
     <!-- services -->
     <string name="service_user" formatted = "false">http://10.0.2.2:9000/api/showuser/%d</string>
     <string name="service_products">http://10.0.2.2:9000/api/allproducts</string>
     <string name="service_login">http://10.0.2.2:9000/api/login</string>
-    <string name="title_activity_product">ProductActivity</string>
-    <string name="title_activity_profile">ProfileActivity</string>
 
     <string name="hello_world">Hello world!</string>
 

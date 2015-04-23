@@ -37,7 +37,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="50dp"
         android:orientation="vertical" >
 
         <TextView
@@ -54,10 +54,29 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="30dp"
             android:textSize="@dimen/abc_text_size_medium_material"
             android:id="@+id/tvEmail"
             />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="vertical" >
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="My products:"
+            android:textColor="#000000"/>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="#4DBD33" />
 
     </LinearLayout>
 
