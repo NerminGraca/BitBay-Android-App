@@ -5,14 +5,23 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.nermingraca.bitbayapp.models.Product;
 import com.example.nermingraca.bitbayapp.models.User;
+import com.example.nermingraca.bitbayapp.singletons.ProductFeed;
 import com.example.nermingraca.bitbayapp.singletons.UserData;
 import com.example.nermingraca.bitbayapp.singletons.UserFeed;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 
 public class ProfileActivity extends ActionBarActivity {
+
+    private ListView mProfileProductList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +37,27 @@ public class ProfileActivity extends ActionBarActivity {
 
         usernameV.setText(username);
         emailV.setText(email);
+
+        ProductFeed productFeed = ProductFeed.getInstance();
+        productFeed.getFeed(getString(R.string.service_products));
+
+        List<Product> products = productFeed.getFeed();
+
+        List<Product> userProducts = new ArrayList<Product>();
+        Iterator<Product> iterator = products.iterator();
+        while (iterator.hasNext()) {
+            Product temp = iterator.next();
+            if (temp.getmOwner().equals(username)) {
+                userProducts.add(temp);
+            }
+        }
+
+        mProfileProductList = (ListView)findViewById(R.id.listOnProfile);
+
+        CustomListAdapter productsAdapter = new CustomListAdapter
+                (this, userProducts);
+
+        mProfileProductList.setAdapter(productsAdapter);
     }
 
     public static User getCurrentUser() {
