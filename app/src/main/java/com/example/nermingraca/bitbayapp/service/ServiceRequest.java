@@ -35,9 +35,9 @@ public class ServiceRequest {
         if(isPost == true) {
             RequestBody requestBody = RequestBody.create(JSON,json);
             requestBuilder.post(requestBody);
-        }
-        else
+        } else {
             requestBuilder.get();
+        }
 
         Request request = requestBuilder
                 .url(url)

@@ -3,17 +3,31 @@ package com.example.nermingraca.bitbayapp;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nermingraca.bitbayapp.models.User;
+import com.example.nermingraca.bitbayapp.service.ServiceRequest;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 
 public class ProductActivity extends ActionBarActivity {
+
+    private Button mViewUserButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +41,7 @@ public class ProductActivity extends ActionBarActivity {
         String price = intent.getStringExtra("price");
         String imagePath = intent.getStringExtra("imagePath");
         String seller = intent.getStringExtra("seller");
+        final int sellerId = intent.getIntExtra("sellerId", 0);
 
         TextView productName = (TextView) findViewById(R.id.productName);
         TextView productDesc = (TextView) findViewById(R.id.productDesc);
@@ -38,6 +53,56 @@ public class ProductActivity extends ActionBarActivity {
         productPrice.setText(price);
         Picasso.with(getBaseContext()).load(imagePath).into(productImage);
         productSeller.setText(seller);
+
+        mViewUserButton = (Button) findViewById(R.id.view_user_button);
+        mViewUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String url = String.format("http://10.0.2.2:9000/api/showuser/%d", sellerId);
+                Log.e("RESPONSE", url);
+                Callback callback = parseResponse();
+                ServiceRequest.get(url, callback);
+
+            }
+        });
+    }
+
+    public Callback parseResponse() {
+        return new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                Log.e("RESPONSE", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+
+                try {
+                    String responseJson = response.body().string();
+
+                    JSONObject userJson = new JSONObject(responseJson);
+                    Log.e("RESPONSE", userJson.toString());
+
+                    String username = userJson.getString("username");
+                    Log.e("RESPONSE", username);
+
+                    String email = userJson.getString("email");
+
+                    Intent goToSeller = new Intent(ProductActivity.this, SellerActivity.class);
+                    goToSeller.putExtra("username", username);
+                    goToSeller.putExtra("email", email);
+
+                    startActivity(goToSeller);
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        };
+
     }
 
 

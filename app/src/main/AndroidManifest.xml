@@ -31,6 +31,10 @@
             android:name=".ProfileActivity"
             android:label="@string/title_activity_profile" >
         </activity>
+        <activity
+            android:name=".SellerActivity"
+            android:label="@string/title_activity_seller" >
+        </activity>
     </application>
 
 </manifest>
