@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.nermingraca.bitbayapp.models.User;
 import com.squareup.picasso.Picasso;
 
 
@@ -64,6 +65,16 @@ public class ProductActivity extends ActionBarActivity {
             moveTaskToBack(true);
             Intent toLogin = new Intent( ProductActivity.this, MainActivity.class);
             startActivity(toLogin);
+            return true;
+        }
+
+        if (id == R.id.profile_action) {
+            User user = ProfileActivity.getCurrentUser();
+            moveTaskToBack(true);
+            Intent intent = new Intent(ProductActivity.this, ProfileActivity.class);
+            intent.putExtra("username", user.getmUsername());
+            intent.putExtra("email", user.getmEmail());
+            startActivity(intent);
             return true;
         }
 

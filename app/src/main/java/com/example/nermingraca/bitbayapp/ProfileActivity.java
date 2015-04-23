@@ -1,52 +1,71 @@
 package com.example.nermingraca.bitbayapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Filter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.nermingraca.bitbayapp.models.Product;
 import com.example.nermingraca.bitbayapp.models.User;
 import com.example.nermingraca.bitbayapp.singletons.ProductFeed;
+import com.example.nermingraca.bitbayapp.singletons.UserData;
+import com.example.nermingraca.bitbayapp.singletons.UserFeed;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 
-public class ShowProducts extends ActionBarActivity {
+public class ProfileActivity extends ActionBarActivity {
 
-    private ListView mProductList;
-    private EditText mFilter;
+    private ListView mProfileProductList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_products);
+        setContentView(R.layout.activity_profile);
+
+        Intent intent = getIntent();
+        String username = intent.getStringExtra("username");
+        String email = intent.getStringExtra("email");
+
+        TextView usernameV = (TextView) findViewById(R.id.tvUsername);
+        TextView emailV = (TextView) findViewById(R.id.tvEmail);
+
+        usernameV.setText(username);
+        emailV.setText(email);
 
         ProductFeed productFeed = ProductFeed.getInstance();
         productFeed.getFeed(getString(R.string.service_products));
 
-        mProductList = (ListView)findViewById(R.id.list);
+        List<Product> products = productFeed.getFeed();
+
+        List<Product> userProducts = new ArrayList<Product>();
+        Iterator<Product> iterator = products.iterator();
+        while (iterator.hasNext()) {
+            Product temp = iterator.next();
+            if (temp.getmOwner().equals(username)) {
+                userProducts.add(temp);
+            }
+        }
+
+        mProfileProductList = (ListView)findViewById(R.id.listOnProfile);
+
         CustomListAdapter productsAdapter = new CustomListAdapter
-                (this, (List<Product>)productFeed.getFeed());
+                (this, userProducts);
 
-        mProductList.setAdapter(productsAdapter);
+        mProfileProductList.setAdapter(productsAdapter);
 
-        mProductList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mProfileProductList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Product clicked = (Product)parent.getItemAtPosition(position);
-                Intent intent = new Intent(ShowProducts.this, ProductActivity.class);
+                Intent intent = new Intent(ProfileActivity.this, ProductActivity.class);
                 intent.putExtra("id", clicked.getmId());
                 intent.putExtra("name", clicked.getmName());
                 intent.putExtra("description", clicked.getmDescription());
@@ -58,33 +77,21 @@ public class ShowProducts extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-
-
-        mFilter = (EditText)findViewById(R.id.edit_text_filter);
-        mFilter.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ( (CustomListAdapter)mProductList.getAdapter()).getFilter().filter(s);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
     }
 
+    public static User getCurrentUser() {
+        int id = UserData.getInstance().getId();
+        String url = String.format("http://10.0.2.2:9000/api/showuser/%d", id);
+
+        UserFeed userFeed = UserFeed.getInstance();
+        return userFeed.getFeed(url);
+    }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_show_product, menu);
+        getMenuInflater().inflate(R.menu.menu_profile, menu);
         return true;
     }
 
@@ -103,7 +110,7 @@ public class ShowProducts extends ActionBarActivity {
         if (id == R.id.logout_action) {
             MainActivity.logout();
             moveTaskToBack(true);
-            Intent toLogin = new Intent( ShowProducts.this, MainActivity.class);
+            Intent toLogin = new Intent( ProfileActivity.this, MainActivity.class);
             startActivity(toLogin);
             return true;
         }
@@ -111,7 +118,7 @@ public class ShowProducts extends ActionBarActivity {
         if (id == R.id.profile_action) {
             User user = ProfileActivity.getCurrentUser();
             moveTaskToBack(true);
-            Intent intent = new Intent(ShowProducts.this, ProfileActivity.class);
+            Intent intent = new Intent(ProfileActivity.this, ProfileActivity.class);
             intent.putExtra("username", user.getmUsername());
             intent.putExtra("email", user.getmEmail());
             startActivity(intent);
