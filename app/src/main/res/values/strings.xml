@@ -1,50 +1,48 @@
 <resources>
     <string name="app_name">BitBayApp</string>
+    <string name="hello_world">Hello world!</string>
 
     <string name="welcome">Welcome to BitBay App</string>
     <string name="action_settings">Settings</string>
 
+    <!-- hints -->
     <string name="email_hint">Enter your email</string>
     <string name="password_hint">Enter your password</string>
     <string name="filter_hint">Search by name</string>
 
+    <!-- button labels -->
     <string name="button_login_label">Login</string>
     <string name="logout_label">Logout</string>
-    <string name="profile_label">Profile</string>
+    <string name="profile_label">My Profile</string>
 
     <string name="username_label">Username</string>
     <string name="email_label">Email</string>
     <string name="my_products_label">My products:</string>
     <string name="sellers_products_label">Sellers products:</string>
 
-
     <!-- keys -->
     <string name="key_user_email">bitcamp.nermin.service.user_email</string>
     <string name="key_user_password">bitcamp.nermin.service.user_password</string>
 
-    <!-- Toast -->
+    <!-- toasts -->
     <string name="toast_try_again">Something went wrong! Try again</string>
     <string name="toast_login_error">Username or password wrong! Please try again.</string>
 
+    <!-- defaults -->
     <string name="default_email">mustafa.ademovic93@gmail.com</string>
     <string name="default_password">123456</string>
-
-    <string name="user_email_key">bitcamp.services.user_email</string>
-    <string name="user_password_key">bitcamp.services.user_password</string>
 
     <!-- activity names -->
     <string name="title_activity_send_post">SendPostActivity</string>
     <string name="title_activity_show_product">Products</string>
     <string name="title_activity_product">Product</string>
-    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_profile">My Profile</string>
     <string name="title_activity_seller">Seller</string>
 
     <!-- services -->
     <string name="service_user" formatted = "false">http://10.0.2.2:9000/api/showuser/%d</string>
     <string name="service_products">http://10.0.2.2:9000/api/allproducts</string>
     <string name="service_login">http://10.0.2.2:9000/api/login</string>
-
-    <string name="hello_world">Hello world!</string>
 
 
 </resources>
