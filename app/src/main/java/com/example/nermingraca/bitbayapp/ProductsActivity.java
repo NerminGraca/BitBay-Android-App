@@ -1,6 +1,5 @@
 package com.example.nermingraca.bitbayapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,20 +9,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Filter;
 import android.widget.ListView;
 
 import com.example.nermingraca.bitbayapp.models.Product;
 import com.example.nermingraca.bitbayapp.models.User;
 import com.example.nermingraca.bitbayapp.singletons.ProductFeed;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class ShowProducts extends ActionBarActivity {
+public class ProductsActivity extends ActionBarActivity {
 
     private ListView mProductList;
     private EditText mFilter;
@@ -46,7 +42,7 @@ public class ShowProducts extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Product clicked = (Product)parent.getItemAtPosition(position);
-                Intent intent = new Intent(ShowProducts.this, ProductActivity.class);
+                Intent intent = new Intent(ProductsActivity.this, ProductActivity.class);
                 intent.putExtra("id", clicked.getmId());
                 intent.putExtra("name", clicked.getmName());
                 intent.putExtra("description", clicked.getmDescription());
@@ -106,7 +102,7 @@ public class ShowProducts extends ActionBarActivity {
         if (id == R.id.logout_action) {
             MainActivity.logout();
             moveTaskToBack(true);
-            Intent toLogin = new Intent( ShowProducts.this, MainActivity.class);
+            Intent toLogin = new Intent( ProductsActivity.this, MainActivity.class);
             startActivity(toLogin);
             return true;
         }
@@ -114,7 +110,7 @@ public class ShowProducts extends ActionBarActivity {
         if (id == R.id.profile_action) {
             User user = ProfileActivity.getCurrentUser();
             moveTaskToBack(true);
-            Intent intent = new Intent(ShowProducts.this, ProfileActivity.class);
+            Intent intent = new Intent(ProductsActivity.this, ProfileActivity.class);
             intent.putExtra("username", user.getmUsername());
             intent.putExtra("email", user.getmEmail());
             startActivity(intent);

@@ -139,7 +139,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void goToProducts(){
-        Intent posts = new Intent(this, ShowProducts.class);
+        Intent posts = new Intent(this, ProductsActivity.class);
         startActivity(posts);
     }
 

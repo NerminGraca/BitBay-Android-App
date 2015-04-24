@@ -74,6 +74,7 @@ public class ProfileActivity extends ActionBarActivity {
                 double priceDouble = clicked.getmPrice();
                 String price = String.format( "$" + "%.2f", priceDouble );
                 intent.putExtra("price", price);
+                intent.putExtra("sellerId", clicked.getmSellerId());
                 startActivity(intent);
             }
         });
