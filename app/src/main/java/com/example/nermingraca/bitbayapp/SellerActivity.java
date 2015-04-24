@@ -70,6 +70,7 @@ public class SellerActivity extends ActionBarActivity {
                 intent.putExtra("description", clicked.getmDescription());
                 intent.putExtra("imagePath", clicked.getThumbnailUrl());
                 intent.putExtra("seller", clicked.getmOwner());
+                intent.putExtra("sellerId", clicked.getmSellerId());
                 double priceDouble = clicked.getmPrice();
                 String price = String.format("$" + "%.2f", priceDouble);
                 intent.putExtra("price", price);

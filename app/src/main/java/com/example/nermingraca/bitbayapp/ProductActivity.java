@@ -42,6 +42,8 @@ public class ProductActivity extends ActionBarActivity {
         String imagePath = intent.getStringExtra("imagePath");
         String seller = intent.getStringExtra("seller");
         final int sellerId = intent.getIntExtra("sellerId", 0);
+        String sId = String.valueOf(sellerId);
+        Log.e("RESPONSE", sId);
 
         TextView productName = (TextView) findViewById(R.id.productName);
         TextView productDesc = (TextView) findViewById(R.id.productDesc);
