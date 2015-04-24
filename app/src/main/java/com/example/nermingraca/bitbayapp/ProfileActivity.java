@@ -74,6 +74,7 @@ public class ProfileActivity extends ActionBarActivity {
                 double priceDouble = clicked.getmPrice();
                 String price = String.format( "$" + "%.2f", priceDouble );
                 intent.putExtra("price", price);
+                intent.putExtra("sellerId", clicked.getmSellerId());
                 startActivity(intent);
             }
         });
@@ -103,9 +104,11 @@ public class ProfileActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        /*
         if (id == R.id.action_settings) {
             return true;
         }
+        */
 
         if (id == R.id.logout_action) {
             MainActivity.logout();

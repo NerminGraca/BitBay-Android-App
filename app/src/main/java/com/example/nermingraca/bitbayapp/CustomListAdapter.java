@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
 import com.example.nermingraca.bitbayapp.models.Product;
+import com.example.nermingraca.bitbayapp.singletons.AppController;
 import com.example.nermingraca.bitbayapp.singletons.ProductFeed;
 
 /**

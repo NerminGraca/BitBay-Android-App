@@ -24,13 +24,6 @@ public class Product {
         this.mSellerId = mSellerId;
     }
 
-    @Override
-    public String toString() {
-        String price = String.format( "%.2f", mPrice );
-        return "Name: " + mName + '\n' +
-               "Price: $" + price;
-    }
-
     public int getmId() {
         return mId;
     }

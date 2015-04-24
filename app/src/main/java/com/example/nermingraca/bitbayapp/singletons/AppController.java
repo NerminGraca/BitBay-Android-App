@@ -1,4 +1,4 @@
-package com.example.nermingraca.bitbayapp;
+package com.example.nermingraca.bitbayapp.singletons;
 
 import android.app.Application;
 import android.text.TextUtils;

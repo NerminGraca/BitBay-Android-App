@@ -139,7 +139,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void goToProducts(){
-        Intent posts = new Intent(this, ShowProducts.class);
+        Intent posts = new Intent(this, ProductsActivity.class);
         startActivity(posts);
     }
 
@@ -171,9 +171,11 @@ public class MainActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        /*
         if (id == R.id.action_settings) {
             return true;
         }
+        */
 
         if (id == R.id.logout_action) {
             logout();
