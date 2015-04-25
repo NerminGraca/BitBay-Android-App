@@ -26,7 +26,7 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Please log in"/>
+        android:text="@string/please_login_label"/>
 
     <EditText
         android:layout_width="fill_parent"
@@ -49,6 +49,18 @@
         android:layout_height="wrap_content"
         android:text="@string/button_login_label"
         android:id="@+id/button_login"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/skip_login_label"
+        android:gravity="center"/>
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/button_skip_login_label"
+        android:id="@+id/button_skip_login"/>
 
 
 

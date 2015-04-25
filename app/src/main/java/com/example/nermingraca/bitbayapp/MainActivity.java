@@ -30,6 +30,10 @@ public class MainActivity extends ActionBarActivity {
 
     private static SharedPreferences mSharedPreferences;
 
+    public static SharedPreferences getmSharedPreferences() {
+        return mSharedPreferences;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +70,16 @@ public class MainActivity extends ActionBarActivity {
 
                 setUserData(email, password);
                 loginUser();
+            }
+        });
+
+        Button buttonSkipLogin = (Button) findViewById(R.id.button_skip_login);
+
+        buttonSkipLogin.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                goToProducts();
             }
         });
 

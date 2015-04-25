@@ -12,9 +12,12 @@
 
     <!-- button labels -->
     <string name="button_login_label">Login</string>
+    <string name="button_skip_login_label">Skip Login</string>
     <string name="logout_label">Logout</string>
     <string name="profile_label">My Profile</string>
 
+    <string name="please_login_label">Please log in</string>
+    <string name="skip_login_label">Or skip log in</string>
     <string name="username_label">Username</string>
     <string name="email_label">Email</string>
     <string name="my_products_label">My products:</string>
