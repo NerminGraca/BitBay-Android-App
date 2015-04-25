@@ -1,0 +1,22 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.nermingraca.bitbayapp.FragmentedProductActivity">
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/pager">
+
+        <android.support.v4.view.PagerTabStrip
+            android:id="@+id/pager_tab"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#458B00"
+            android:textColor="#fff"
+            android:padding="5dp" />
+
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>

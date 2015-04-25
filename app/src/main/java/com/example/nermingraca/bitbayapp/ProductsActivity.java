@@ -42,7 +42,7 @@ public class ProductsActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Product clicked = (Product)parent.getItemAtPosition(position);
-                Intent intent = new Intent(ProductsActivity.this, ProductActivity.class);
+                Intent intent = new Intent(ProductsActivity.this, FragmentedProductActivity.class);
                 intent.putExtra("id", clicked.getmId());
                 intent.putExtra("name", clicked.getmName());
                 intent.putExtra("description", clicked.getmDescription());
