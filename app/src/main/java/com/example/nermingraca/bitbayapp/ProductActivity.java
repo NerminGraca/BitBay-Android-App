@@ -111,8 +111,15 @@ public class ProductActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_product, menu);
-        return true;
+        if(MainActivity.getmSharedPreferences().getString(
+                getString(R.string.key_user_email),
+                null
+        ) != null){
+            getMenuInflater().inflate(R.menu.menu_show_product, menu);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
