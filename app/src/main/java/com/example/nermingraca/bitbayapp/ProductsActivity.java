@@ -52,6 +52,7 @@ public class ProductsActivity extends ActionBarActivity {
                 String price = String.format( "$" + "%.2f", priceDouble );
                 intent.putExtra("price", price);
                 intent.putExtra("sellerId", clicked.getmSellerId());
+                intent.putExtra("quantity", clicked.getmQuantity());
                 startActivity(intent);
             }
         });

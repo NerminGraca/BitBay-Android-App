@@ -25,6 +25,7 @@
     <string name="description_label">Description</string>
     <string name="buy_label">Buy</string>
     <string name="price_label">Price</string>
+    <string name="quantity_label">Quantity</string>
 
     <!-- keys -->
     <string name="key_user_email">bitcamp.nermin.service.user_email</string>

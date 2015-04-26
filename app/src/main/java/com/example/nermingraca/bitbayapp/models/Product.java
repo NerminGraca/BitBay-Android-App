@@ -12,9 +12,10 @@ public class Product {
     private String mOwner;
     private String thumbnailUrl;
     private int mSellerId;
+    private int mQuantity;
 
     public Product(int mId, String mName, double mPrice, String mDescription,
-                   String mOwner, String thumbnailUrl, int mSellerId) {
+                   String mOwner, String thumbnailUrl, int mSellerId, int quantity) {
         this.mId = mId;
         this.mName = mName;
         this.mPrice = mPrice;
@@ -22,6 +23,7 @@ public class Product {
         this.mOwner = mOwner;
         this.thumbnailUrl = thumbnailUrl;
         this.mSellerId = mSellerId;
+        this.mQuantity = quantity;
     }
 
     public int getmId() {
@@ -78,5 +80,13 @@ public class Product {
 
     public void setmSellerId(int mSellerId) {
         this.mSellerId = mSellerId;
+    }
+
+    public int getmQuantity() {
+        return mQuantity;
+    }
+
+    public void setmQuantity(int mQuantity) {
+        this.mQuantity = mQuantity;
     }
 }

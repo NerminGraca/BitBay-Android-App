@@ -13,6 +13,7 @@ import android.view.MenuItem;
 
 import com.example.nermingraca.bitbayapp.fragments.MainProductFragment;
 import com.example.nermingraca.bitbayapp.fragments.SecondProductFragment;
+import com.example.nermingraca.bitbayapp.models.User;
 
 
 public class FragmentedProductActivity extends ActionBarActivity {
@@ -23,6 +24,7 @@ public class FragmentedProductActivity extends ActionBarActivity {
     private String price;
     private String imagePath;
     private String seller;
+    private int quantity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class FragmentedProductActivity extends ActionBarActivity {
         imagePath = intent.getStringExtra("imagePath");
         seller = intent.getStringExtra("seller");
         final int sellerId = intent.getIntExtra("sellerId", 0);
+        quantity = intent.getIntExtra("quantity", 0);
 
         BitAdapter bitAdapter = new BitAdapter(getSupportFragmentManager());
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -71,6 +74,7 @@ public class FragmentedProductActivity extends ActionBarActivity {
                 arguments.putInt(SecondProductFragment.SECOND_PRODUCT_FRAGMENT_KEY, position);
                 arguments.putString("description", description);
                 arguments.putString("seller", seller);
+                arguments.putInt("quantity", quantity);
                 show.setArguments(arguments);
                 return show;
             }
@@ -109,7 +113,27 @@ public class FragmentedProductActivity extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
+        /*
         if (id == R.id.action_settings) {
+            return true;
+        }
+        */
+
+        if (id == R.id.logout_action) {
+            MainActivity.logout();
+            moveTaskToBack(true);
+            Intent toLogin = new Intent( FragmentedProductActivity.this, MainActivity.class);
+            startActivity(toLogin);
+            return true;
+        }
+
+        if (id == R.id.profile_action) {
+            User user = ProfileActivity.getCurrentUser();
+            moveTaskToBack(true);
+            Intent intent = new Intent(FragmentedProductActivity.this, ProfileActivity.class);
+            intent.putExtra("username", user.getmUsername());
+            intent.putExtra("email", user.getmEmail());
+            startActivity(intent);
             return true;
         }
 

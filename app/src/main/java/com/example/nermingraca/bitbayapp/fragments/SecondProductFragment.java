@@ -34,12 +34,16 @@ public class SecondProductFragment extends Fragment {
         int position = arguments.getInt(SECOND_PRODUCT_FRAGMENT_KEY);
         String description = arguments.getString("description");
         String seller = arguments.getString("seller");
+        int quantity = arguments.getInt("quantity");
+        String quantityText = "Available quantity: " + quantity;
 
         TextView productDesc = (TextView) v.findViewById(R.id.productDesc);
         TextView productSeller = (TextView) v.findViewById(R.id.productSeller);
+        TextView productQuantity = (TextView) v.findViewById(R.id.productQuantity);
 
         productDesc.setText(description);
         productSeller.setText(seller);
+        productQuantity.setText(quantityText);
 
         return v;
     }
