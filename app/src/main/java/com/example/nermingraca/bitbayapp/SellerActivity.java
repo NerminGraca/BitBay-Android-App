@@ -126,6 +126,12 @@ public class SellerActivity extends ActionBarActivity {
             return true;
         }
 
+        if (id == R.id.cart_action) {
+            Intent intent = new Intent(SellerActivity.this, CartActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

@@ -153,6 +153,12 @@ public class ProductActivity extends ActionBarActivity {
             return true;
         }
 
+        if (id == R.id.cart_action) {
+            Intent intent = new Intent(ProductActivity.this, CartActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

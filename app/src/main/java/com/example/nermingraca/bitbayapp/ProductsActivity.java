@@ -53,6 +53,8 @@ public class ProductsActivity extends ActionBarActivity {
                 intent.putExtra("price", price);
                 intent.putExtra("sellerId", clicked.getmSellerId());
                 intent.putExtra("quantity", clicked.getmQuantity());
+                intent.putExtra("sellerAddress", clicked.getmSellerAddress());
+                intent.putExtra("sellerRating", clicked.getmSellerRating());
                 startActivity(intent);
             }
         });
@@ -121,6 +123,12 @@ public class ProductsActivity extends ActionBarActivity {
             Intent intent = new Intent(ProductsActivity.this, ProfileActivity.class);
             intent.putExtra("username", user.getmUsername());
             intent.putExtra("email", user.getmEmail());
+            startActivity(intent);
+            return true;
+        }
+
+        if (id == R.id.cart_action) {
+            Intent intent = new Intent(ProductsActivity.this, CartActivity.class);
             startActivity(intent);
             return true;
         }

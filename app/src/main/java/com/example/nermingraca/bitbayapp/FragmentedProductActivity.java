@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.nermingraca.bitbayapp.fragments.MainProductFragment;
+import com.example.nermingraca.bitbayapp.fragments.ProductSellerFragment;
 import com.example.nermingraca.bitbayapp.fragments.SecondProductFragment;
 import com.example.nermingraca.bitbayapp.models.User;
 
@@ -25,6 +26,9 @@ public class FragmentedProductActivity extends ActionBarActivity {
     private String imagePath;
     private String seller;
     private int quantity;
+    private int sellerId;
+    private double sellerRating;
+    private String sellerAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +42,10 @@ public class FragmentedProductActivity extends ActionBarActivity {
         price = intent.getStringExtra("price");
         imagePath = intent.getStringExtra("imagePath");
         seller = intent.getStringExtra("seller");
-        final int sellerId = intent.getIntExtra("sellerId", 0);
+        sellerId = intent.getIntExtra("sellerId", 0);
         quantity = intent.getIntExtra("quantity", 0);
+        sellerRating = intent.getDoubleExtra("sellerRating", 0);
+        sellerAddress = intent.getStringExtra("sellerAddress");
 
         BitAdapter bitAdapter = new BitAdapter(getSupportFragmentManager());
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -75,6 +81,18 @@ public class FragmentedProductActivity extends ActionBarActivity {
                 arguments.putString("description", description);
                 arguments.putString("seller", seller);
                 arguments.putInt("quantity", quantity);
+                arguments.putInt("sellerId", sellerId);
+                show.setArguments(arguments);
+                return show;
+            }
+
+            if(position == 2) {
+                show = new ProductSellerFragment();
+                Bundle arguments = new Bundle();
+                arguments.putInt(ProductSellerFragment.PRODUCT_SELLER_FRAGMENT_KEY, position);
+                arguments.putString("seller", seller);
+                arguments.putString("sellerAddress", sellerAddress);
+                arguments.putDouble("sellerRating", sellerRating);
                 show.setArguments(arguments);
                 return show;
             }
@@ -84,15 +102,17 @@ public class FragmentedProductActivity extends ActionBarActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 3;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             if (position == 0) {
                 return "Product info";
-            } else {
+            } else if (position == 1) {
                 return "Product description";
+            } else {
+                return "Sellers info";
             }
         }
     }
@@ -101,8 +121,15 @@ public class FragmentedProductActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_fragmented_product, menu);
-        return true;
+        if(MainActivity.getmSharedPreferences().getString(
+                getString(R.string.key_user_email),
+                null
+        ) != null){
+            getMenuInflater().inflate(R.menu.menu_show_product, menu);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -133,6 +160,12 @@ public class FragmentedProductActivity extends ActionBarActivity {
             Intent intent = new Intent(FragmentedProductActivity.this, ProfileActivity.class);
             intent.putExtra("username", user.getmUsername());
             intent.putExtra("email", user.getmEmail());
+            startActivity(intent);
+            return true;
+        }
+
+        if (id == R.id.cart_action) {
+            Intent intent = new Intent(FragmentedProductActivity.this, CartActivity.class);
             startActivity(intent);
             return true;
         }

@@ -13,9 +13,12 @@ public class Product {
     private String thumbnailUrl;
     private int mSellerId;
     private int mQuantity;
+    private double mSellerRating;
+    private String mSellerAddress;
 
     public Product(int mId, String mName, double mPrice, String mDescription,
-                   String mOwner, String thumbnailUrl, int mSellerId, int quantity) {
+                   String mOwner, String thumbnailUrl, int mSellerId, int quantity,
+                   double mSellerRating, String mSellerAddress) {
         this.mId = mId;
         this.mName = mName;
         this.mPrice = mPrice;
@@ -24,6 +27,8 @@ public class Product {
         this.thumbnailUrl = thumbnailUrl;
         this.mSellerId = mSellerId;
         this.mQuantity = quantity;
+        this.mSellerRating = mSellerRating;
+        this.mSellerAddress = mSellerAddress;
     }
 
     public int getmId() {
@@ -88,5 +93,21 @@ public class Product {
 
     public void setmQuantity(int mQuantity) {
         this.mQuantity = mQuantity;
+    }
+
+    public double getmSellerRating() {
+        return mSellerRating;
+    }
+
+    public void setmSellerRating(double mSellerRating) {
+        this.mSellerRating = mSellerRating;
+    }
+
+    public String getmSellerAddress() {
+        return mSellerAddress;
+    }
+
+    public void setmSellerAddress(String mSellerAddress) {
+        this.mSellerAddress = mSellerAddress;
     }
 }

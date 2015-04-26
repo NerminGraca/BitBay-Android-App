@@ -39,6 +39,10 @@
             android:name=".FragmentedProductActivity"
             android:label="@string/title_activity_fragmented_product" >
         </activity>
+        <activity
+            android:name=".CartActivity"
+            android:label="@string/title_activity_cart" >
+        </activity>
     </application>
 
 </manifest>
