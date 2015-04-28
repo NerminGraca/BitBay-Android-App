@@ -27,7 +27,7 @@
     <string name="buy_label">Add to cart</string>
     <string name="price_label">Price</string>
     <string name="quantity_label">Quantity</string>
-    <string name="seller_rating_label">Seller's Rating</string>
+    <string name="seller_rating_label">Sellers Rating</string>
     <string name="address_label">Address</string>
     <string name="cart_label">Cart</string>
 
