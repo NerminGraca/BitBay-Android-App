@@ -70,6 +70,8 @@ public class FragmentedProductActivity extends ActionBarActivity {
                 arguments.putString("imgPath", imagePath);
                 arguments.putString("name", name);
                 arguments.putString("price", price);
+                arguments.putInt("sellerId", sellerId);
+                arguments.putInt("productId", id);
                 show.setArguments(arguments);
                 return show;
             }

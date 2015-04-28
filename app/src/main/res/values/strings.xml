@@ -45,7 +45,6 @@
     <string name="default_password">123456</string>
 
     <!-- activity names -->
-    <string name="title_activity_send_post">SendPostActivity</string>
     <string name="title_activity_show_product">Products</string>
     <string name="title_activity_product">Product</string>
     <string name="title_activity_profile">My Profile</string>
@@ -58,7 +57,7 @@
     <string name="service_products">http://10.0.2.2:9000/api/allproducts</string>
     <string name="service_login">http://10.0.2.2:9000/api/login</string>
     <string name="service_image">http://10.0.2.2:9000/assets/</string>
-
+    <string name="service_to_cart">http://10.0.2.2:9000/api/tocart</string>
 
 
 </resources>

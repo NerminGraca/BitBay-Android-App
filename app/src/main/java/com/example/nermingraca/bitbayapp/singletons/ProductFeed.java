@@ -56,7 +56,7 @@ public class ProductFeed {
                     JSONArray array = new JSONArray(response.body().string());
                     for(int i = 0; i < array.length(); i++){
                         JSONObject productObj = array.getJSONObject(i);
-                        Log.d("RESPONSE", productObj.toString());
+                        //Log.d("RESPONSE", productObj.toString());
                         int id = productObj.getInt("id");
                         String name = productObj.getString("name");
                         double price = productObj.getDouble("price");
@@ -73,6 +73,7 @@ public class ProductFeed {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.e("ERROR", e.getMessage());
                 }
 
             }

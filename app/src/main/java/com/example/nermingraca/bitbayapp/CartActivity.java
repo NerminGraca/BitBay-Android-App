@@ -3,18 +3,68 @@ package com.example.nermingraca.bitbayapp;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
+import com.example.nermingraca.bitbayapp.models.Product;
 import com.example.nermingraca.bitbayapp.models.User;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CartActivity extends ActionBarActivity {
+
+    private ListView mProductList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
+        Intent intent = getIntent();
+        String json = intent.getStringExtra("jsonProducts");
+        Log.d("DEBUG", json);
+        List<Product> products = productsFromJson(json);
+
+        mProductList = (ListView)findViewById(R.id.cart_list);
+        CustomListAdapter productsAdapter = new CustomListAdapter
+                (this, products);
+        mProductList.setAdapter(productsAdapter);
+    }
+
+    public List<Product> productsFromJson(String json) {
+        List<Product> tempList = new ArrayList<Product>();
+        try {
+            JSONArray array = new JSONArray(json);
+            for(int i = 0; i < array.length(); i++){
+                JSONObject productObj = array.getJSONObject(i);
+                Log.d("RESPONSE", productObj.toString());
+                int id = productObj.getInt("id");
+                String name = productObj.getString("name");
+                double price = productObj.getDouble("price");
+                String description = productObj.getString("description");
+                String owner = productObj.getString("owner");
+                String imagePath = productObj.getString("productImagePath1");
+                int userId = productObj.getInt("ownerId");
+                int quantity = productObj.getInt("quantity");
+                double ownerRating = productObj.getDouble("ownerRating");
+                String ownerAddress = productObj.getString("ownerAddress");
+                tempList.add(new Product
+                        (id, name, price, description, owner, imagePath, userId, quantity,
+                                ownerRating, ownerAddress));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("ERROR", e.getMessage());
+        }
+        return tempList;
     }
 
 
