@@ -81,7 +81,6 @@ public class FragmentedProductActivity extends ActionBarActivity {
                 arguments.putString("description", description);
                 arguments.putString("seller", seller);
                 arguments.putInt("quantity", quantity);
-                arguments.putInt("sellerId", sellerId);
                 show.setArguments(arguments);
                 return show;
             }
@@ -93,6 +92,7 @@ public class FragmentedProductActivity extends ActionBarActivity {
                 arguments.putString("seller", seller);
                 arguments.putString("sellerAddress", sellerAddress);
                 arguments.putDouble("sellerRating", sellerRating);
+                arguments.putInt("sellerId", sellerId);
                 show.setArguments(arguments);
                 return show;
             }

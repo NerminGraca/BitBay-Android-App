@@ -30,7 +30,6 @@ public class SecondProductFragment extends Fragment {
 
     public static final String SECOND_PRODUCT_FRAGMENT_KEY =
             "ba.nermin.bitcamp.second_product_fragment_key";
-    private Button mViewUserButton;
 
 
     public SecondProductFragment() {
@@ -47,71 +46,16 @@ public class SecondProductFragment extends Fragment {
         Bundle arguments = getArguments();
         int position = arguments.getInt(SECOND_PRODUCT_FRAGMENT_KEY);
         String description = arguments.getString("description");
-        String seller = arguments.getString("seller");
         int quantity = arguments.getInt("quantity");
         String quantityText = "Available quantity: " + quantity;
-        final int sellerId = arguments.getInt("sellerId");
 
         TextView productDesc = (TextView) v.findViewById(R.id.productDesc);
-        TextView productSeller = (TextView) v.findViewById(R.id.productSeller);
         TextView productQuantity = (TextView) v.findViewById(R.id.productQuantity);
 
         productDesc.setText(description);
-        productSeller.setText(seller);
         productQuantity.setText(quantityText);
-
-        mViewUserButton = (Button) v.findViewById(R.id.view_user_button);
-        mViewUserButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String resUrl = getString(R.string.service_user);
-                String url = String.format(resUrl, sellerId);
-                Log.e("RESPONSE", url);
-                Callback callback = parseResponse();
-                ServiceRequest.get(url, callback);
-
-            }
-        });
 
         return v;
     }
-
-    public Callback parseResponse() {
-        return new Callback() {
-            @Override
-            public void onFailure(Request request, IOException e) {
-                Log.e("RESPONSE", e.getMessage());
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-
-                try {
-                    String responseJson = response.body().string();
-
-                    JSONObject userJson = new JSONObject(responseJson);
-                    Log.e("RESPONSE", userJson.toString());
-
-                    String username = userJson.getString("username");
-                    Log.e("RESPONSE", username);
-
-                    String email = userJson.getString("email");
-
-                    Intent goToSeller = new Intent(getActivity(), SellerActivity.class);
-                    goToSeller.putExtra("username", username);
-                    goToSeller.putExtra("email", email);
-
-                    startActivity(goToSeller);
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        };
-
-    }
-
 
 }

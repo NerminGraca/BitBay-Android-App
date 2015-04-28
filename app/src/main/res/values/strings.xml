@@ -30,6 +30,7 @@
     <string name="seller_rating_label">Sellers Rating</string>
     <string name="address_label">Address</string>
     <string name="cart_label">Cart</string>
+    <string name="seller_profile_label">Sellers Profile</string>
 
     <!-- keys -->
     <string name="key_user_email">bitcamp.nermin.service.user_email</string>

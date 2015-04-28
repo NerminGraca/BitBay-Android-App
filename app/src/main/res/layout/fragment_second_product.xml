@@ -66,49 +66,6 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="vertical"
-            android:layout_weight="1" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:text="@string/title_activity_seller"
-                android:textColor="#000000"/>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="#4DBD33" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:orientation="horizontal"
-                android:weightSum="6">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:textSize="@dimen/abc_text_size_headline_material"
-                    android:id="@+id/productSeller"
-                    android:gravity="center"
-                    android:layout_weight="5"/>
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Sellers profile"
-                    android:id="@+id/view_user_button"
-                    android:layout_weight="1"/>
-
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1">
 
