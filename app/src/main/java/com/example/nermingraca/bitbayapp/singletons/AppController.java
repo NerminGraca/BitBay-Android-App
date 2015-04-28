@@ -1,6 +1,7 @@
 package com.example.nermingraca.bitbayapp.singletons;
 
 import android.app.Application;
+import android.content.Context;
 import android.text.TextUtils;
 
 import com.android.volley.Request;
@@ -18,6 +19,7 @@ public class AppController extends Application {
 
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
+    private static Context mContext;
 
     private static AppController mInstance;
 
@@ -25,6 +27,11 @@ public class AppController extends Application {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
+        mContext = this;
+    }
+
+    public static Context getContext(){
+        return mContext;
     }
 
     public static synchronized AppController getInstance() {

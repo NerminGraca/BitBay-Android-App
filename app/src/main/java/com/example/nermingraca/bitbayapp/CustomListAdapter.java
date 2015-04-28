@@ -62,30 +62,30 @@ public class CustomListAdapter extends BaseAdapter {
             imageLoader = AppController.getInstance().getImageLoader();
         NetworkImageView thumbNail = (NetworkImageView) convertView
                 .findViewById(R.id.thumbnail);
-        TextView title = (TextView) convertView.findViewById(R.id.title);
-        TextView rating = (TextView) convertView.findViewById(R.id.rating);
+        TextView name = (TextView) convertView.findViewById(R.id.title);
+        TextView price = (TextView) convertView.findViewById(R.id.rating);
         TextView genre = (TextView) convertView.findViewById(R.id.genre);
-        TextView year = (TextView) convertView.findViewById(R.id.releaseYear);
+        TextView owner = (TextView) convertView.findViewById(R.id.releaseYear);
 
-        // getting movie data for the row
+        // getting data for the row
         Product product = productItems.get(position);
 
         // thumbnail image
         thumbNail.setImageUrl(product.getThumbnailUrl(), imageLoader);
 
         // name
-        title.setText(product.getmName());
+        name.setText(product.getmName());
 
         // price
         double doublePrice = product.getmPrice();
-        String price = String.format( "%.2f", doublePrice );
-        rating.setText("Price: $" + price);
+        String priceString = String.format( "%.2f", doublePrice );
+        price.setText("Price: $" + priceString);
 
         // description
         String genreStr = product.getmDescription();
 
         // owner
-        year.setText("Seller: " + String.valueOf(product.getmOwner()));
+        owner.setText("Seller: " + String.valueOf(product.getmOwner()));
 
         return convertView;
     }

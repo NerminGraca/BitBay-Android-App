@@ -42,7 +42,7 @@ public class UserFeed {
         return new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                Log.e("RESPONSE", e.getMessage());
+                Log.e("ERROR", e.getMessage());
             }
 
             @Override
@@ -83,6 +83,7 @@ public class UserFeed {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.e("ERROR", e.getMessage());
                 }
 
             }

@@ -44,7 +44,7 @@ public class ProductFeed {
         return new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                Log.e("RESPONSE", e.getMessage());
+                Log.e("ERROR", e.getMessage());
             }
 
             @Override

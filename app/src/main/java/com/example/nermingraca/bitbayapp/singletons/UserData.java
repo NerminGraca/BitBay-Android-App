@@ -1,6 +1,7 @@
 package com.example.nermingraca.bitbayapp.singletons;
 
 import android.util.Base64;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,6 +46,7 @@ public class UserData {
             return obj.toString();
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.e("ERROR", e.getMessage());
             return null;
         }
     }

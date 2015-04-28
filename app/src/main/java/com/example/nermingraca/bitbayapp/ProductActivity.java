@@ -42,7 +42,7 @@ public class ProductActivity extends ActionBarActivity {
         String seller = intent.getStringExtra("seller");
         final int sellerId = intent.getIntExtra("sellerId", 0);
         String sId = String.valueOf(sellerId);
-        Log.e("RESPONSE", sId);
+        Log.i("RESPONSE", sId);
 
         TextView productName = (TextView) findViewById(R.id.productName);
         TextView productDesc = (TextView) findViewById(R.id.productDesc);
@@ -59,9 +59,9 @@ public class ProductActivity extends ActionBarActivity {
         mViewUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String url = String.format("http://10.0.2.2:9000/api/showuser/%d", sellerId);
-                Log.e("RESPONSE", url);
+                String resUrl = getString(R.string.service_user);
+                String url = String.format(resUrl, sellerId);
+                Log.i("RESPONSE", url);
                 Callback callback = parseResponse();
                 ServiceRequest.get(url, callback);
 
@@ -73,7 +73,7 @@ public class ProductActivity extends ActionBarActivity {
         return new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                Log.e("RESPONSE", e.getMessage());
+                Log.e("ERROR", e.getMessage());
             }
 
             @Override
@@ -99,6 +99,7 @@ public class ProductActivity extends ActionBarActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.e("ERROR", e.getMessage());
                 }
 
             }

@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -99,6 +100,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onFailure(Request request, IOException e) {
                 makeToast(R.string.toast_try_again);
+                Log.e("ERROR", e.getMessage());
             }
 
             @Override
@@ -116,6 +118,7 @@ public class MainActivity extends ActionBarActivity {
                 } catch (JSONException e) {
                     makeToast(R.string.toast_login_error);
                     e.printStackTrace();
+                    Log.e("ERROR", "Wrong username or password entered");
                 }
             }
         };

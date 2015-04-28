@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.nermingraca.bitbayapp.models.Product;
 import com.example.nermingraca.bitbayapp.models.User;
+import com.example.nermingraca.bitbayapp.singletons.AppController;
 import com.example.nermingraca.bitbayapp.singletons.ProductFeed;
 import com.example.nermingraca.bitbayapp.singletons.UserData;
 import com.example.nermingraca.bitbayapp.singletons.UserFeed;
@@ -82,8 +83,8 @@ public class ProfileActivity extends ActionBarActivity {
 
     public static User getCurrentUser() {
         int id = UserData.getInstance().getId();
-        String url = String.format("http://10.0.2.2:9000/api/showuser/%d", id);
-
+        String resUrl = AppController.getContext().getResources().getString(R.string.service_user);
+        String url = String.format(resUrl, id);
         UserFeed userFeed = UserFeed.getInstance();
         return userFeed.getFeed(url);
     }

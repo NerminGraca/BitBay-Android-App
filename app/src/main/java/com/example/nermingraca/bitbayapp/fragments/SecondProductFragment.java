@@ -64,8 +64,8 @@ public class SecondProductFragment extends Fragment {
         mViewUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String url = String.format("http://10.0.2.2:9000/api/showuser/%d", sellerId);
+                String resUrl = getString(R.string.service_user);
+                String url = String.format(resUrl, sellerId);
                 Log.e("RESPONSE", url);
                 Callback callback = parseResponse();
                 ServiceRequest.get(url, callback);

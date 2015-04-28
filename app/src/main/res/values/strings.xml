@@ -8,7 +8,7 @@
     <!-- hints -->
     <string name="email_hint">Enter your email</string>
     <string name="password_hint">Enter your password</string>
-    <string name="filter_hint">Search by name</string>
+    <string name="filter_hint">Filter list by name</string>
 
     <!-- button labels -->
     <string name="button_login_label">Login</string>
@@ -53,12 +53,10 @@
     <string name="title_activity_cart">Cart</string>
 
     <!-- services -->
-    <string name="service_user" formatted = "false">http://10.0.2.2:9000/api/showuser/%d</string>
+    <string name="service_user">http://10.0.2.2:9000/api/showuser/%d</string>
     <string name="service_products">http://10.0.2.2:9000/api/allproducts</string>
     <string name="service_login">http://10.0.2.2:9000/api/login</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="service_image">http://10.0.2.2:9000/assets/</string>
 
 
 

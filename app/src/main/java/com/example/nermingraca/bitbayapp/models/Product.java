@@ -1,5 +1,8 @@
 package com.example.nermingraca.bitbayapp.models;
 
+import com.example.nermingraca.bitbayapp.R;
+import com.example.nermingraca.bitbayapp.singletons.AppController;
+
 /**
  * Created by nermingraca on 14/04/15.
  */
@@ -72,7 +75,8 @@ public class Product {
     }
 
     public String getThumbnailUrl() {
-        return "http://10.0.2.2:9000" + "/assets/" + thumbnailUrl;
+        String url = AppController.getContext().getResources().getString(R.string.service_image);
+        return url + thumbnailUrl;
     }
 
     public void setThumbnailUrl(String thumbnailUrl) {

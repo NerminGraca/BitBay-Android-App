@@ -63,17 +63,20 @@ public class SellerActivity extends ActionBarActivity {
         mSellersProductList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Product clicked = (Product) parent.getItemAtPosition(position);
-                Intent intent = new Intent(SellerActivity.this, ProductActivity.class);
+                Product clicked = (Product)parent.getItemAtPosition(position);
+                Intent intent = new Intent(SellerActivity.this, FragmentedProductActivity.class);
                 intent.putExtra("id", clicked.getmId());
                 intent.putExtra("name", clicked.getmName());
                 intent.putExtra("description", clicked.getmDescription());
                 intent.putExtra("imagePath", clicked.getThumbnailUrl());
                 intent.putExtra("seller", clicked.getmOwner());
-                intent.putExtra("sellerId", clicked.getmSellerId());
                 double priceDouble = clicked.getmPrice();
-                String price = String.format("$" + "%.2f", priceDouble);
+                String price = String.format( "$" + "%.2f", priceDouble );
                 intent.putExtra("price", price);
+                intent.putExtra("sellerId", clicked.getmSellerId());
+                intent.putExtra("quantity", clicked.getmQuantity());
+                intent.putExtra("sellerAddress", clicked.getmSellerAddress());
+                intent.putExtra("sellerRating", clicked.getmSellerRating());
                 startActivity(intent);
             }
         });
