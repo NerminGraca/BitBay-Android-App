@@ -42,7 +42,7 @@ public class ProductsActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Product clicked = (Product)parent.getItemAtPosition(position);
-                Intent intent = new Intent(ProductsActivity.this, ProductActivity.class);
+                Intent intent = new Intent(ProductsActivity.this, FragmentedProductActivity.class);
                 intent.putExtra("id", clicked.getmId());
                 intent.putExtra("name", clicked.getmName());
                 intent.putExtra("description", clicked.getmDescription());
@@ -52,6 +52,9 @@ public class ProductsActivity extends ActionBarActivity {
                 String price = String.format( "$" + "%.2f", priceDouble );
                 intent.putExtra("price", price);
                 intent.putExtra("sellerId", clicked.getmSellerId());
+                intent.putExtra("quantity", clicked.getmQuantity());
+                intent.putExtra("sellerAddress", clicked.getmSellerAddress());
+                intent.putExtra("sellerRating", clicked.getmSellerRating());
                 startActivity(intent);
             }
         });
@@ -120,6 +123,12 @@ public class ProductsActivity extends ActionBarActivity {
             Intent intent = new Intent(ProductsActivity.this, ProfileActivity.class);
             intent.putExtra("username", user.getmUsername());
             intent.putExtra("email", user.getmEmail());
+            startActivity(intent);
+            return true;
+        }
+
+        if (id == R.id.cart_action) {
+            Intent intent = new Intent(ProductsActivity.this, CartActivity.class);
             startActivity(intent);
             return true;
         }

@@ -67,7 +67,12 @@ public class UserFeed {
                         String owner = productObj.getString("owner");
                         String imagePath = productObj.getString("productImagePath1");
                         int sellerId = productObj.getInt("ownerId");
-                        products.add(new Product(id, name, price, description, owner, imagePath, sellerId));
+                        int quantity = productObj.getInt("quantity");
+                        double ownerRating = productObj.getDouble("ownerRating");
+                        String ownerAddress = productObj.getString("ownerAddress");
+                        products.add(new Product
+                                (id, name, price, description, owner, imagePath, sellerId, quantity,
+                                        ownerRating, ownerAddress));
                     }
 
                     user.setmEmail(email);

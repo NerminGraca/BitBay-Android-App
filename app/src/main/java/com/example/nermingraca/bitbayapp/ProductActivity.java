@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -150,6 +149,12 @@ public class ProductActivity extends ActionBarActivity {
             Intent intent = new Intent(ProductActivity.this, ProfileActivity.class);
             intent.putExtra("username", user.getmUsername());
             intent.putExtra("email", user.getmEmail());
+            startActivity(intent);
+            return true;
+        }
+
+        if (id == R.id.cart_action) {
+            Intent intent = new Intent(ProductActivity.this, CartActivity.class);
             startActivity(intent);
             return true;
         }
