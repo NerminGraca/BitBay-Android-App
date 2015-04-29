@@ -1,9 +1,9 @@
 package com.example.nermingraca.bitbayapp.util;
 
-import com.android.volley.toolbox.ImageLoader.ImageCache;
-
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
+
+import com.android.volley.toolbox.ImageLoader.ImageCache;
 
 /**
  * Created by nermingraca on 17/04/15.

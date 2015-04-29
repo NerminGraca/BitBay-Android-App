@@ -1,20 +1,22 @@
-package com.example.nermingraca.bitbayapp;
+package com.example.nermingraca.bitbayapp.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.nermingraca.bitbayapp.R;
 import com.example.nermingraca.bitbayapp.fragments.MainProductFragment;
 import com.example.nermingraca.bitbayapp.fragments.ProductSellerFragment;
 import com.example.nermingraca.bitbayapp.fragments.SecondProductFragment;
 import com.example.nermingraca.bitbayapp.models.User;
+import com.example.nermingraca.bitbayapp.singletons.CartFeed;
 
 
 public class FragmentedProductActivity extends ActionBarActivity {
@@ -83,6 +85,7 @@ public class FragmentedProductActivity extends ActionBarActivity {
                 arguments.putString("description", description);
                 arguments.putString("seller", seller);
                 arguments.putInt("quantity", quantity);
+                arguments.putInt("productId", id);
                 show.setArguments(arguments);
                 return show;
             }
@@ -167,11 +170,23 @@ public class FragmentedProductActivity extends ActionBarActivity {
         }
 
         if (id == R.id.cart_action) {
+            CartFeed cartFeed = CartFeed.getInstance();
+            cartFeed.getCartFeed();
+            String jsonProducts = cartFeed.getCartList();
             Intent intent = new Intent(FragmentedProductActivity.this, CartActivity.class);
+            intent.putExtra("jsonProducts", cartFeed.getCartList());
             startActivity(intent);
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public static String getCartProductsJsonString() {
+        CartFeed cartFeed = CartFeed.getInstance();
+        cartFeed.getCartFeed();
+        String jsonProducts = cartFeed.getCartList();
+        Log.d("DEBUG", jsonProducts);
+        return jsonProducts;
     }
 }

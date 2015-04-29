@@ -58,6 +58,6 @@
     <string name="service_login">http://10.0.2.2:9000/api/login</string>
     <string name="service_image">http://10.0.2.2:9000/assets/</string>
     <string name="service_to_cart">http://10.0.2.2:9000/api/tocart</string>
-
+    <string name="service_get_cart">http://10.0.2.2:9000/api/getcart</string>
 
 </resources>

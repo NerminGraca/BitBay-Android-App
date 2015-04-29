@@ -1,13 +1,15 @@
-package com.example.nermingraca.bitbayapp;
+package com.example.nermingraca.bitbayapp.activities;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 
+import com.example.nermingraca.bitbayapp.CustomListAdapter;
+import com.example.nermingraca.bitbayapp.R;
 import com.example.nermingraca.bitbayapp.models.Product;
 import com.example.nermingraca.bitbayapp.models.User;
 
@@ -30,7 +32,7 @@ public class CartActivity extends ActionBarActivity {
 
         Intent intent = getIntent();
         String json = intent.getStringExtra("jsonProducts");
-        Log.d("DEBUG", json);
+        //Log.d("DEBUG", json);
         List<Product> products = productsFromJson(json);
 
         mProductList = (ListView)findViewById(R.id.cart_list);

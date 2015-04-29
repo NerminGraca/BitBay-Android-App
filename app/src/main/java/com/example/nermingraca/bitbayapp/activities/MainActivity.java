@@ -1,12 +1,12 @@
-package com.example.nermingraca.bitbayapp;
+package com.example.nermingraca.bitbayapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.nermingraca.bitbayapp.R;
 import com.example.nermingraca.bitbayapp.service.ServiceRequest;
 import com.example.nermingraca.bitbayapp.singletons.UserData;
 import com.squareup.okhttp.Callback;

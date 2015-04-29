@@ -1,70 +1,60 @@
-package com.example.nermingraca.bitbayapp;
+package com.example.nermingraca.bitbayapp.activities;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 
+import com.example.nermingraca.bitbayapp.CustomListAdapter;
+import com.example.nermingraca.bitbayapp.R;
 import com.example.nermingraca.bitbayapp.models.Product;
 import com.example.nermingraca.bitbayapp.models.User;
+import com.example.nermingraca.bitbayapp.service.ServiceRequest;
 import com.example.nermingraca.bitbayapp.singletons.ProductFeed;
+import com.example.nermingraca.bitbayapp.singletons.UserData;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.List;
 
 
-public class SellerActivity extends ActionBarActivity {
+public class ProductsActivity extends ActionBarActivity {
 
-    private ListView mSellersProductList;
+    private ListView mProductList;
+    private EditText mFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_seller);
-
-
-        Intent intent = getIntent();
-        String username = intent.getStringExtra("username");
-        String email = intent.getStringExtra("email");
-
-        TextView usernameV = (TextView) findViewById(R.id.tvUsername);
-        TextView emailV = (TextView) findViewById(R.id.tvEmail);
-
-        usernameV.setText(username);
-        emailV.setText(email);
+        setContentView(R.layout.activity_show_products);
 
         ProductFeed productFeed = ProductFeed.getInstance();
         productFeed.getFeed(getString(R.string.service_products));
 
-        List<Product> products = productFeed.getFeed();
-
-        List<Product> userProducts = new ArrayList<Product>();
-        Iterator<Product> iterator = products.iterator();
-        while (iterator.hasNext()) {
-            Product temp = iterator.next();
-            if (temp.getmOwner().equals(username)) {
-                userProducts.add(temp);
-            }
-        }
-
-        mSellersProductList = (ListView)findViewById(R.id.sellersList);
-
+        mProductList = (ListView)findViewById(R.id.list);
         CustomListAdapter productsAdapter = new CustomListAdapter
-                (this, userProducts);
+                (this, (List<Product>)productFeed.getFeed());
 
-        mSellersProductList.setAdapter(productsAdapter);
+        mProductList.setAdapter(productsAdapter);
 
-        mSellersProductList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mProductList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Product clicked = (Product)parent.getItemAtPosition(position);
-                Intent intent = new Intent(SellerActivity.this, FragmentedProductActivity.class);
+                Intent intent = new Intent(ProductsActivity.this, FragmentedProductActivity.class);
                 intent.putExtra("id", clicked.getmId());
                 intent.putExtra("name", clicked.getmName());
                 intent.putExtra("description", clicked.getmDescription());
@@ -80,7 +70,27 @@ public class SellerActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
+
+
+        mFilter = (EditText)findViewById(R.id.edit_text_filter);
+        mFilter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                ( (CustomListAdapter)mProductList.getAdapter()).getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
+
 
 
     @Override
@@ -114,7 +124,7 @@ public class SellerActivity extends ActionBarActivity {
         if (id == R.id.logout_action) {
             MainActivity.logout();
             moveTaskToBack(true);
-            Intent toLogin = new Intent( SellerActivity.this, MainActivity.class);
+            Intent toLogin = new Intent(ProductsActivity.this, MainActivity.class);
             startActivity(toLogin);
             return true;
         }
@@ -122,7 +132,7 @@ public class SellerActivity extends ActionBarActivity {
         if (id == R.id.profile_action) {
             User user = ProfileActivity.getCurrentUser();
             moveTaskToBack(true);
-            Intent intent = new Intent(SellerActivity.this, ProfileActivity.class);
+            Intent intent = new Intent(ProductsActivity.this, ProfileActivity.class);
             intent.putExtra("username", user.getmUsername());
             intent.putExtra("email", user.getmEmail());
             startActivity(intent);
@@ -130,11 +140,47 @@ public class SellerActivity extends ActionBarActivity {
         }
 
         if (id == R.id.cart_action) {
-            Intent intent = new Intent(SellerActivity.this, CartActivity.class);
-            startActivity(intent);
+            toCart();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void toCart() {
+        int buyerId = UserData.getInstance().getId();
+        String url = getString(R.string.service_get_cart);
+        JSONObject json = new JSONObject();
+
+        try {
+            json.put("userId", buyerId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("ERROR", e.getMessage());
+        }
+        String jsonString = json.toString();
+        Log.d("DEBUG", jsonString);
+        Callback callback = response();
+        ServiceRequest.post(url, jsonString, callback);
+    }
+
+    public Callback response() {
+        return new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                Log.e("ERROR", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+
+                String responseJson = response.body().string();
+                Log.d("DEBUG", responseJson);
+                Intent toCart = new Intent(ProductsActivity.this, CartActivity.class);
+                toCart.putExtra("jsonProducts", responseJson);
+                startActivity(toCart);
+            }
+        };
+
     }
 }

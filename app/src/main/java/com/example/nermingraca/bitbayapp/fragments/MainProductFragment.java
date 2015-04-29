@@ -12,8 +12,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.nermingraca.bitbayapp.CartActivity;
 import com.example.nermingraca.bitbayapp.R;
+import com.example.nermingraca.bitbayapp.activities.CartActivity;
 import com.example.nermingraca.bitbayapp.service.ServiceRequest;
 import com.example.nermingraca.bitbayapp.singletons.UserData;
 import com.squareup.okhttp.Callback;
@@ -21,7 +21,6 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
