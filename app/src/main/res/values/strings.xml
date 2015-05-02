@@ -31,6 +31,7 @@
     <string name="cart_label">Cart</string>
     <string name="seller_profile_label">Sellers Profile</string>
     <string name="empty_cart_label">Your cart is empty! Buy something please :)</string>
+    <string name="checkout_label">Checkout</string>
 
     <!-- keys -->
     <string name="key_user_email">bitcamp.nermin.service.user_email</string>
