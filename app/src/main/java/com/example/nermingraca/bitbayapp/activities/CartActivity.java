@@ -29,8 +29,6 @@ import java.util.List;
 
 public class CartActivity extends ActionBarActivity {
 
-    private ListView mProductList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +43,7 @@ public class CartActivity extends ActionBarActivity {
             Log.d("DEBUG in Cart Activity", json);
             List<Product> products = productsFromJson(json);
 
-            mProductList = (ListView)findViewById(R.id.cart_list);
+            ListView mProductList = (ListView) findViewById(R.id.cart_list);
             CustomListAdapter productsAdapter = new CustomListAdapter
                     (this, products);
             mProductList.setAdapter(productsAdapter);
