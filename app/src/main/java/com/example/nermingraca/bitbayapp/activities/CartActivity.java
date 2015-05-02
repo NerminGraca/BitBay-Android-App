@@ -14,6 +14,7 @@ import com.example.nermingraca.bitbayapp.models.Product;
 import com.example.nermingraca.bitbayapp.models.User;
 import com.example.nermingraca.bitbayapp.service.ServiceRequest;
 import com.example.nermingraca.bitbayapp.singletons.UserData;
+import com.example.nermingraca.bitbayapp.util.CustomListAdapterWithQuantity;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -44,7 +45,7 @@ public class CartActivity extends ActionBarActivity {
             List<Product> products = productsFromJson(json);
 
             ListView mProductList = (ListView) findViewById(R.id.cart_list);
-            CustomListAdapter productsAdapter = new CustomListAdapter
+            CustomListAdapterWithQuantity productsAdapter = new CustomListAdapterWithQuantity
                     (this, products);
             mProductList.setAdapter(productsAdapter);
         }
@@ -68,9 +69,12 @@ public class CartActivity extends ActionBarActivity {
                 int quantity = productObj.getInt("quantity");
                 double ownerRating = productObj.getDouble("ownerRating");
                 String ownerAddress = productObj.getString("ownerAddress");
-                tempList.add(new Product
+                Product temp = new Product
                         (id, name, price, description, owner, imagePath, userId, quantity,
-                                ownerRating, ownerAddress));
+                                ownerRating, ownerAddress);
+                tempList.add(temp);
+                int orderedQuantity = productObj.getInt("orderedQuantity");
+                temp.setmOrderedQuantity(orderedQuantity);
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -18,6 +18,7 @@ public class Product {
     private int mQuantity;
     private double mSellerRating;
     private String mSellerAddress;
+    private int mOrderedQuantity;
 
     public Product(int mId, String mName, double mPrice, String mDescription,
                    String mOwner, String thumbnailUrl, int mSellerId, int quantity,
@@ -113,5 +114,13 @@ public class Product {
 
     public void setmSellerAddress(String mSellerAddress) {
         this.mSellerAddress = mSellerAddress;
+    }
+
+    public int getmOrderedQuantity() {
+        return mOrderedQuantity;
+    }
+
+    public void setmOrderedQuantity(int mOrderedQuantity) {
+        this.mOrderedQuantity = mOrderedQuantity;
     }
 }
