@@ -43,6 +43,10 @@
             android:name=".activities.CartActivity"
             android:label="@string/title_activity_cart" >
         </activity>
+        <activity
+            android:name=".activities.CartEmptyActivity"
+            android:label="@string/title_activity_cart_empty" >
+        </activity>
     </application>
 
 </manifest>

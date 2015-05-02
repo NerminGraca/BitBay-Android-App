@@ -34,17 +34,23 @@ public class CartActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cart);
 
         Intent intent = getIntent();
         String json = intent.getStringExtra("jsonProducts");
-        Log.d("DEBUG in Cart Activity", json);
-        List<Product> products = productsFromJson(json);
 
-        mProductList = (ListView)findViewById(R.id.cart_list);
-        CustomListAdapter productsAdapter = new CustomListAdapter
-                (this, products);
-        mProductList.setAdapter(productsAdapter);
+        if (json.contains("<!DOCTYPE html>")) {
+            setContentView(R.layout.activity_cart_empty);
+        } else {
+            setContentView(R.layout.activity_cart);
+            Log.d("DEBUG in Cart Activity", json);
+            List<Product> products = productsFromJson(json);
+
+            mProductList = (ListView)findViewById(R.id.cart_list);
+            CustomListAdapter productsAdapter = new CustomListAdapter
+                    (this, products);
+            mProductList.setAdapter(productsAdapter);
+        }
+
     }
 
     public List<Product> productsFromJson(String json) {
