@@ -10,12 +10,11 @@
     <string name="password_hint">Enter your password</string>
     <string name="filter_hint">Filter list by name</string>
 
-    <!-- button labels -->
+    <!-- labels -->
     <string name="button_login_label">Login</string>
     <string name="button_skip_login_label">Skip Login</string>
     <string name="logout_label">Logout</string>
     <string name="profile_label">My Profile</string>
-
     <string name="please_login_label">Please log in</string>
     <string name="skip_login_label">Or skip log in</string>
     <string name="username_label">Username</string>
@@ -31,6 +30,7 @@
     <string name="address_label">Address</string>
     <string name="cart_label">Cart</string>
     <string name="seller_profile_label">Sellers Profile</string>
+    <string name="empty_cart_label">Your cart is empty! Buy something please :)</string>
 
     <!-- keys -->
     <string name="key_user_email">bitcamp.nermin.service.user_email</string>
@@ -45,7 +45,6 @@
     <string name="default_password">123456</string>
 
     <!-- activity names -->
-    <string name="title_activity_send_post">SendPostActivity</string>
     <string name="title_activity_show_product">Products</string>
     <string name="title_activity_product">Product</string>
     <string name="title_activity_profile">My Profile</string>
@@ -58,7 +57,8 @@
     <string name="service_products">http://10.0.2.2:9000/api/allproducts</string>
     <string name="service_login">http://10.0.2.2:9000/api/login</string>
     <string name="service_image">http://10.0.2.2:9000/assets/</string>
-
-
+    <string name="service_to_cart">http://10.0.2.2:9000/api/tocart</string>
+    <string name="service_get_cart">http://10.0.2.2:9000/api/getcart</string>
+    <string name="title_activity_cart_empty">CartEmptyActivity</string>
 
 </resources>

@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.nermingraca.bitbayapp.R;
-import com.example.nermingraca.bitbayapp.SellerActivity;
+import com.example.nermingraca.bitbayapp.activities.SellerActivity;
 import com.example.nermingraca.bitbayapp.service.ServiceRequest;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
@@ -79,7 +79,7 @@ public class ProductSellerFragment extends Fragment {
         return new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                Log.e("RESPONSE", e.getMessage());
+                Log.e("ERROR", e.getMessage());
             }
 
             @Override

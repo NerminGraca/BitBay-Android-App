@@ -1,20 +1,31 @@
-package com.example.nermingraca.bitbayapp;
+package com.example.nermingraca.bitbayapp.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.nermingraca.bitbayapp.R;
 import com.example.nermingraca.bitbayapp.fragments.MainProductFragment;
 import com.example.nermingraca.bitbayapp.fragments.ProductSellerFragment;
 import com.example.nermingraca.bitbayapp.fragments.SecondProductFragment;
 import com.example.nermingraca.bitbayapp.models.User;
+import com.example.nermingraca.bitbayapp.service.ServiceRequest;
+import com.example.nermingraca.bitbayapp.singletons.UserData;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 
 public class FragmentedProductActivity extends ActionBarActivity {
@@ -70,6 +81,8 @@ public class FragmentedProductActivity extends ActionBarActivity {
                 arguments.putString("imgPath", imagePath);
                 arguments.putString("name", name);
                 arguments.putString("price", price);
+                arguments.putInt("sellerId", sellerId);
+                arguments.putInt("productId", id);
                 show.setArguments(arguments);
                 return show;
             }
@@ -81,6 +94,7 @@ public class FragmentedProductActivity extends ActionBarActivity {
                 arguments.putString("description", description);
                 arguments.putString("seller", seller);
                 arguments.putInt("quantity", quantity);
+                arguments.putInt("productId", id);
                 show.setArguments(arguments);
                 return show;
             }
@@ -165,11 +179,48 @@ public class FragmentedProductActivity extends ActionBarActivity {
         }
 
         if (id == R.id.cart_action) {
-            Intent intent = new Intent(FragmentedProductActivity.this, CartActivity.class);
-            startActivity(intent);
+            toCart();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void toCart() {
+        int buyerId = UserData.getInstance().getId();
+        String url = getString(R.string.service_get_cart);
+        JSONObject json = new JSONObject();
+
+        try {
+            json.put("userId", buyerId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("ERROR", e.getMessage());
+        }
+        String jsonString = json.toString();
+        Log.d("DEBUG", jsonString);
+        Callback callback = response();
+        ServiceRequest.post(url, jsonString, callback);
+    }
+
+    public Callback response() {
+        return new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                Log.e("ERROR", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+
+                String responseJson = response.body().string();
+                Log.d("DEBUG", responseJson);
+                Intent toCart = new Intent(FragmentedProductActivity.this, CartActivity.class);
+                toCart.putExtra("jsonProducts", responseJson);
+                startActivity(toCart);
+            }
+        };
+
+    }
+
 }

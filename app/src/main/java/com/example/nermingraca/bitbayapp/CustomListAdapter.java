@@ -1,8 +1,5 @@
 package com.example.nermingraca.bitbayapp;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,6 +14,9 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.example.nermingraca.bitbayapp.models.Product;
 import com.example.nermingraca.bitbayapp.singletons.AppController;
 import com.example.nermingraca.bitbayapp.singletons.ProductFeed;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nermingraca on 17/04/15.
