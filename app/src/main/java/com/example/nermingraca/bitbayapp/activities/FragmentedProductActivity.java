@@ -16,7 +16,16 @@ import com.example.nermingraca.bitbayapp.fragments.MainProductFragment;
 import com.example.nermingraca.bitbayapp.fragments.ProductSellerFragment;
 import com.example.nermingraca.bitbayapp.fragments.SecondProductFragment;
 import com.example.nermingraca.bitbayapp.models.User;
-import com.example.nermingraca.bitbayapp.singletons.CartFeed;
+import com.example.nermingraca.bitbayapp.service.ServiceRequest;
+import com.example.nermingraca.bitbayapp.singletons.UserData;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 
 public class FragmentedProductActivity extends ActionBarActivity {
@@ -170,23 +179,48 @@ public class FragmentedProductActivity extends ActionBarActivity {
         }
 
         if (id == R.id.cart_action) {
-            CartFeed cartFeed = CartFeed.getInstance();
-            cartFeed.getCartFeed();
-            String jsonProducts = cartFeed.getCartList();
-            Intent intent = new Intent(FragmentedProductActivity.this, CartActivity.class);
-            intent.putExtra("jsonProducts", cartFeed.getCartList());
-            startActivity(intent);
+            toCart();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    public static String getCartProductsJsonString() {
-        CartFeed cartFeed = CartFeed.getInstance();
-        cartFeed.getCartFeed();
-        String jsonProducts = cartFeed.getCartList();
-        Log.d("DEBUG", jsonProducts);
-        return jsonProducts;
+    private void toCart() {
+        int buyerId = UserData.getInstance().getId();
+        String url = getString(R.string.service_get_cart);
+        JSONObject json = new JSONObject();
+
+        try {
+            json.put("userId", buyerId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.e("ERROR", e.getMessage());
+        }
+        String jsonString = json.toString();
+        Log.d("DEBUG", jsonString);
+        Callback callback = response();
+        ServiceRequest.post(url, jsonString, callback);
     }
+
+    public Callback response() {
+        return new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+                Log.e("ERROR", e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+
+                String responseJson = response.body().string();
+                Log.d("DEBUG", responseJson);
+                Intent toCart = new Intent(FragmentedProductActivity.this, CartActivity.class);
+                toCart.putExtra("jsonProducts", responseJson);
+                startActivity(toCart);
+            }
+        };
+
+    }
+
 }
