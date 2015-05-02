@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.nermingraca.bitbayapp.CustomListAdapter;
@@ -48,6 +50,15 @@ public class CartActivity extends ActionBarActivity {
             CustomListAdapterWithQuantity productsAdapter = new CustomListAdapterWithQuantity
                     (this, products);
             mProductList.setAdapter(productsAdapter);
+
+            Button mViewCheckoutButton = (Button) findViewById(R.id.view_to_checkout_button);
+            mViewCheckoutButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(CartActivity.this, CheckoutWebViewActivity.class);
+                    startActivity(intent);
+                }
+            });
         }
 
     }
