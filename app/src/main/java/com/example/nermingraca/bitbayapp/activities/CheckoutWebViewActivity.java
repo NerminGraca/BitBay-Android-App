@@ -18,7 +18,7 @@ public class CheckoutWebViewActivity extends ActionBarActivity {
 
         WebView myWebView = (WebView) findViewById(R.id.webview);
         User user = ProfileActivity.getCurrentUser();
-        String url = "http://10.0.2.2:9000/cartpage/" + String.valueOf(user.getmId());
+        String url = getString(R.string.service_cart_checkout) + String.valueOf(user.getmId());
         myWebView.loadUrl(url);
     }
 

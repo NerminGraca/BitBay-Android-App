@@ -79,7 +79,8 @@ public class FragmentedProductActivity extends ActionBarActivity {
             user = ProfileActivity.getCurrentUser();
 
             if(position == 0) {
-                if(sellerId == user.getmId()) {
+                if(sellerId == user.getmId() || MainActivity.getmSharedPreferences().getString(
+                        getString(R.string.key_user_email), null ) == null) {
                     show = new MainOwnProductFragment();
                     Bundle arguments = new Bundle();
                     arguments.putInt(MainOwnProductFragment.MAIN_OWN_PRODUCT_FRAGMENT_KEY, position);
@@ -103,7 +104,8 @@ public class FragmentedProductActivity extends ActionBarActivity {
             }
 
             if(position == 1) {
-                if(sellerId == user.getmId()) {
+                if(sellerId == user.getmId() || MainActivity.getmSharedPreferences().getString(
+                        getString(R.string.key_user_email), null ) == null) {
                     show = new SecondOwnProductFragment();
                     Bundle arguments = new Bundle();
                     arguments.putInt(SecondOwnProductFragment.SECOND_OWN_PRODUCT_FRAGMENT_KEY, position);

@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.nermingraca.bitbayapp.CustomListAdapter;
 import com.example.nermingraca.bitbayapp.R;
 import com.example.nermingraca.bitbayapp.models.Product;
 import com.example.nermingraca.bitbayapp.models.User;
@@ -64,7 +63,7 @@ public class CartActivity extends ActionBarActivity {
     }
 
     public List<Product> productsFromJson(String json) {
-        List<Product> tempList = new ArrayList<Product>();
+        List<Product> tempList = new ArrayList<>();
         try {
             JSONArray array = new JSONArray(json);
             for(int i = 0; i < array.length(); i++){

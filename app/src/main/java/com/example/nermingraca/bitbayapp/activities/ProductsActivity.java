@@ -28,7 +28,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.List;
 
 
 public class ProductsActivity extends ActionBarActivity {
@@ -46,7 +45,7 @@ public class ProductsActivity extends ActionBarActivity {
 
         mProductList = (ListView)findViewById(R.id.list);
         CustomListAdapter productsAdapter = new CustomListAdapter
-                (this, (List<Product>)productFeed.getFeed());
+                (this, productFeed.getFeed());
 
         mProductList.setAdapter(productsAdapter);
 
