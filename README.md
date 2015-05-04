@@ -16,7 +16,7 @@ Instructions on how to run the application :
 git@github.com:Shibby92/bitBayv1.0.git
 
 2. If necesary switch to needed branch, usually master branch will work
-   (As for now use "novoEmina" branch)
+   (As for now use "developServiceCart" branch)
 3. Using the terminal enter  the folder  with the  project.
 4. When in bitBayv1.0 folder run the command:
 "activator clean compile eclipse run" -without the quotation marks
