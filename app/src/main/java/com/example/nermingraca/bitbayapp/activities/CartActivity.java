@@ -1,14 +1,19 @@
 package com.example.nermingraca.bitbayapp.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.nermingraca.bitbayapp.R;
 import com.example.nermingraca.bitbayapp.models.Product;
@@ -49,6 +54,49 @@ public class CartActivity extends ActionBarActivity {
             CustomListAdapterWithQuantity productsAdapter = new CustomListAdapterWithQuantity
                     (this, products);
             mProductList.setAdapter(productsAdapter);
+
+            mProductList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    final Product clicked = (Product) parent.getItemAtPosition(position);
+
+                    AlertDialog.Builder adb = new AlertDialog.Builder(CartActivity.this);
+                    adb.setView(view);
+                    adb.setTitle(getString(R.string.remove_from_cart_label));
+
+                    adb.setIcon(android.R.drawable.ic_dialog_alert);
+
+                    adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "You clicked on YES", Toast.LENGTH_SHORT).show();
+                            String url = getString(R.string.service_remove_from_cart);
+                            Log.d("CART DEBUG", url);
+                            JSONObject json = new JSONObject();
+                            try {
+                                json.put("productId", clicked.getmId());
+                                json.put("userId", clicked.getmSellerId());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                Log.e("ERROR", e.getMessage());
+                            }
+                            String jsonString = json.toString();
+                            Callback callback = response();
+                            ServiceRequest.post(url, jsonString, callback);
+
+                            finish();
+                        }
+                    });
+
+                    adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(getApplicationContext(), "You clicked on Cancel", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
+                    parent.removeViewInLayout(view);
+                    adb.show();
+                }
+            });
 
             Button mViewCheckoutButton = (Button) findViewById(R.id.view_to_checkout_button);
             mViewCheckoutButton.setOnClickListener(new View.OnClickListener() {

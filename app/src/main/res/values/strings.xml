@@ -32,6 +32,7 @@
     <string name="seller_profile_label">Sellers Profile</string>
     <string name="empty_cart_label">Your cart is empty! Buy something please :)</string>
     <string name="checkout_label">Checkout</string>
+    <string name="remove_from_cart_label">Remove this item from cart?</string>
 
     <!-- keys -->
     <string name="key_user_email">bitcamp.nermin.service.user_email</string>
@@ -63,5 +64,6 @@
     <string name="service_to_cart">http://10.0.2.2:9000/api/tocart</string>
     <string name="service_get_cart">http://10.0.2.2:9000/api/getcart</string>
     <string name="service_cart_checkout">http://10.0.2.2:9000/api/cartpage/</string>
+    <string name="service_remove_from_cart">http://10.0.2.2:9000/api/removefromcart</string>
 
 </resources>
