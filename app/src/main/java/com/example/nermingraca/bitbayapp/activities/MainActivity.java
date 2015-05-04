@@ -139,7 +139,7 @@ public class MainActivity extends ActionBarActivity {
                 getString(R.string.key_user_password),
                 userData.getPassword()
         );
-        editor.commit();
+        editor.apply();
     }
 
     private void makeToast(final int messageId){
@@ -170,7 +170,7 @@ public class MainActivity extends ActionBarActivity {
     public static void logout() {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
 
 

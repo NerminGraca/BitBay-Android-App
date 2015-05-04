@@ -47,6 +47,10 @@
             android:name=".activities.CartEmptyActivity"
             android:label="@string/title_activity_cart_empty" >
         </activity>
+        <activity
+            android:name=".activities.CheckoutWebViewActivity"
+            android:label="@string/title_activity_checkout_web_view" >
+        </activity>
     </application>
 
 </manifest>

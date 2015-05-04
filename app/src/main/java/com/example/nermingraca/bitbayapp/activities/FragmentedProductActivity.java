@@ -12,8 +12,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.nermingraca.bitbayapp.R;
+import com.example.nermingraca.bitbayapp.fragments.MainOwnProductFragment;
 import com.example.nermingraca.bitbayapp.fragments.MainProductFragment;
 import com.example.nermingraca.bitbayapp.fragments.ProductSellerFragment;
+import com.example.nermingraca.bitbayapp.fragments.SecondOwnProductFragment;
 import com.example.nermingraca.bitbayapp.fragments.SecondProductFragment;
 import com.example.nermingraca.bitbayapp.models.User;
 import com.example.nermingraca.bitbayapp.service.ServiceRequest;
@@ -40,6 +42,7 @@ public class FragmentedProductActivity extends ActionBarActivity {
     private int sellerId;
     private double sellerRating;
     private String sellerAddress;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,30 +76,54 @@ public class FragmentedProductActivity extends ActionBarActivity {
         public Fragment getItem(int position) {
 
             Fragment show;
+            user = ProfileActivity.getCurrentUser();
 
             if(position == 0) {
-                show = new MainProductFragment();
-                Bundle arguments = new Bundle();
-                arguments.putInt(MainProductFragment.MAIN_PRODUCT_FRAGMENT_KEY, position);
-                arguments.putString("imgPath", imagePath);
-                arguments.putString("name", name);
-                arguments.putString("price", price);
-                arguments.putInt("sellerId", sellerId);
-                arguments.putInt("productId", id);
-                show.setArguments(arguments);
-                return show;
+                if(sellerId == user.getmId() || MainActivity.getmSharedPreferences().getString(
+                        getString(R.string.key_user_email), null ) == null) {
+                    show = new MainOwnProductFragment();
+                    Bundle arguments = new Bundle();
+                    arguments.putInt(MainOwnProductFragment.MAIN_OWN_PRODUCT_FRAGMENT_KEY, position);
+                    arguments.putString("imgPath", imagePath);
+                    arguments.putString("name", name);
+                    arguments.putString("price", price);
+                    show.setArguments(arguments);
+                    return show;
+                } else {
+                    show = new MainProductFragment();
+                    Bundle arguments = new Bundle();
+                    arguments.putInt(MainProductFragment.MAIN_PRODUCT_FRAGMENT_KEY, position);
+                    arguments.putString("imgPath", imagePath);
+                    arguments.putString("name", name);
+                    arguments.putString("price", price);
+                    arguments.putInt("sellerId", sellerId);
+                    arguments.putInt("productId", id);
+                    show.setArguments(arguments);
+                    return show;
+                }
             }
 
             if(position == 1) {
-                show = new SecondProductFragment();
-                Bundle arguments = new Bundle();
-                arguments.putInt(SecondProductFragment.SECOND_PRODUCT_FRAGMENT_KEY, position);
-                arguments.putString("description", description);
-                arguments.putString("seller", seller);
-                arguments.putInt("quantity", quantity);
-                arguments.putInt("productId", id);
-                show.setArguments(arguments);
-                return show;
+                if(sellerId == user.getmId() || MainActivity.getmSharedPreferences().getString(
+                        getString(R.string.key_user_email), null ) == null) {
+                    show = new SecondOwnProductFragment();
+                    Bundle arguments = new Bundle();
+                    arguments.putInt(SecondOwnProductFragment.SECOND_OWN_PRODUCT_FRAGMENT_KEY, position);
+                    arguments.putString("description", description);
+                    arguments.putString("seller", seller);
+                    show.setArguments(arguments);
+                    return show;
+                } else {
+                    show = new SecondProductFragment();
+                    Bundle arguments = new Bundle();
+                    arguments.putInt(SecondProductFragment.SECOND_PRODUCT_FRAGMENT_KEY, position);
+                    arguments.putString("description", description);
+                    arguments.putString("seller", seller);
+                    arguments.putInt("quantity", quantity);
+                    arguments.putInt("productId", id);
+                    show.setArguments(arguments);
+                    return show;
+                }
             }
 
             if(position == 2) {
@@ -169,7 +196,7 @@ public class FragmentedProductActivity extends ActionBarActivity {
         }
 
         if (id == R.id.profile_action) {
-            User user = ProfileActivity.getCurrentUser();
+            user = ProfileActivity.getCurrentUser();
             moveTaskToBack(true);
             Intent intent = new Intent(FragmentedProductActivity.this, ProfileActivity.class);
             intent.putExtra("username", user.getmUsername());
