@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">BitBayApp</string>
     <string name="hello_world">Hello world!</string>
-    <string name="welcome">Welcome to BitBay App</string>
+    <string name="welcome">Welcome to bitBay App</string>
     <string name="action_settings">Settings</string>
     <string name="welcomeToCart">Welcome to your cart</string>
 

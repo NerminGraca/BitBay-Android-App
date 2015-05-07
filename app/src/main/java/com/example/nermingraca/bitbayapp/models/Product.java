@@ -76,8 +76,8 @@ public class Product {
     }
 
     public String getThumbnailUrl() {
-        String url = AppController.getContext().getResources().getString(R.string.service_image);
-        return url + thumbnailUrl;
+
+        return thumbnailUrl;
     }
 
     public void setThumbnailUrl(String thumbnailUrl) {
