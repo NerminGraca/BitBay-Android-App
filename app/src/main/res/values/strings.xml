@@ -57,13 +57,13 @@
     <string name="title_activity_checkout_web_view">Checkout</string>
 
     <!-- services -->
-    <string name="service_user">http://10.0.2.2:9000/api/showuser/%d</string>
-    <string name="service_products">http://10.0.2.2:9000/api/allproducts</string>
-    <string name="service_login">http://10.0.2.2:9000/api/login</string>
-    <string name="service_image">http://10.0.2.2:9000/assets/</string>
-    <string name="service_to_cart">http://10.0.2.2:9000/api/tocart</string>
-    <string name="service_get_cart">http://10.0.2.2:9000/api/getcart</string>
-    <string name="service_cart_checkout">http://10.0.2.2:9000/api/cartpage/</string>
-    <string name="service_remove_from_cart">http://10.0.2.2:9000/api/removefromcart</string>
+    <string name="service_user">http://192.168.0.128:9000/api/showuser/%d</string>
+    <string name="service_products">http://192.168.0.128:9000/api/allproducts</string>
+    <string name="service_login">http://192.168.0.128:9000/api/login</string>
+    <string name="service_image">http://192.168.0.128:9000/assets/</string>
+    <string name="service_to_cart">http://192.168.0.128:9000/api/tocart</string>
+    <string name="service_get_cart">http://192.168.0.128:9000/api/getcart</string>
+    <string name="service_cart_checkout">http://192.168.0.128:9000/api/cartpage/</string>
+    <string name="service_remove_from_cart">http://192.168.0.128:9000/api/removefromcart</string>
 
 </resources>
