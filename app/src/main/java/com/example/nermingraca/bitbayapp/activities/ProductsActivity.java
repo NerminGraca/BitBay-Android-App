@@ -13,7 +13,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 
-import com.example.nermingraca.bitbayapp.CustomListAdapter;
+import com.example.nermingraca.bitbayapp.util.CustomListAdapter;
 import com.example.nermingraca.bitbayapp.R;
 import com.example.nermingraca.bitbayapp.models.Product;
 import com.example.nermingraca.bitbayapp.models.User;

@@ -1,4 +1,4 @@
-package com.example.nermingraca.bitbayapp;
+package com.example.nermingraca.bitbayapp.util;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.example.nermingraca.bitbayapp.R;
 import com.example.nermingraca.bitbayapp.models.Product;
 import com.example.nermingraca.bitbayapp.singletons.AppController;
 import com.example.nermingraca.bitbayapp.singletons.ProductFeed;
