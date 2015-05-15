@@ -33,7 +33,6 @@ import java.io.IOException;
 public class ProductsActivity extends ActionBarActivity {
 
     private ListView mProductList;
-    private EditText mFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +70,7 @@ public class ProductsActivity extends ActionBarActivity {
         });
 
 
-        mFilter = (EditText)findViewById(R.id.edit_text_filter);
+        EditText mFilter = (EditText) findViewById(R.id.edit_text_filter);
         mFilter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -80,7 +79,7 @@ public class ProductsActivity extends ActionBarActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ( (CustomListAdapter)mProductList.getAdapter()).getFilter().filter(s);
+                ((CustomListAdapter) mProductList.getAdapter()).getFilter().filter(s);
             }
 
             @Override

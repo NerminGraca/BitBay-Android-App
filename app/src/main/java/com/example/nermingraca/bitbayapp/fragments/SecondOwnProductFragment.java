@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.nermingraca.bitbayapp.R;
-import com.example.nermingraca.bitbayapp.singletons.UserData;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,7 +30,7 @@ public class SecondOwnProductFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_second_own_product, container, false);
 
         Bundle arguments = getArguments();
-        int position = arguments.getInt(SECOND_OWN_PRODUCT_FRAGMENT_KEY);
+        //int position = arguments.getInt(SECOND_OWN_PRODUCT_FRAGMENT_KEY);
         String description = arguments.getString("description");
         int quantity = arguments.getInt("quantity");
         String quantityText = "Available quantity: " + quantity;

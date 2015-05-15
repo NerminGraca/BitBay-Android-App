@@ -33,7 +33,6 @@ public class MainProductFragment extends Fragment {
 
     public static final String MAIN_PRODUCT_FRAGMENT_KEY =
             "ba.nermin.bitcamp.main_product_fragment_key";
-    private Button mToCartButton;
 
 
     public MainProductFragment() {
@@ -48,7 +47,7 @@ public class MainProductFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_main_product, container, false);
 
         Bundle arguments = getArguments();
-        int position = arguments.getInt(MAIN_PRODUCT_FRAGMENT_KEY);
+        //int position = arguments.getInt(MAIN_PRODUCT_FRAGMENT_KEY);
         String imgPath = arguments.getString("imgPath");
         String name = arguments.getString("name");
         String price = arguments.getString("price");
@@ -64,7 +63,7 @@ public class MainProductFragment extends Fragment {
         productPrice.setText(price);
         Picasso.with(getActivity().getApplicationContext()).load(imgPath).into(productImage);
 
-        mToCartButton = (Button) v.findViewById(R.id.view_to_cart_button);
+        Button mToCartButton = (Button) v.findViewById(R.id.view_to_cart_button);
         mToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

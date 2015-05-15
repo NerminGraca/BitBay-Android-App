@@ -32,7 +32,7 @@ public class ServiceRequest {
 
         Request.Builder requestBuilder = new Request.Builder();
 
-        if(isPost == true) {
+        if(isPost) {
             RequestBody requestBody = RequestBody.create(JSON,json);
             requestBuilder.post(requestBody);
         } else {

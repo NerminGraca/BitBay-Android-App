@@ -54,7 +54,7 @@ public class UserFeed {
                     String email = jsonObject.getString("email");
                     String password = jsonObject.getString("password");
                     String username = jsonObject.getString("username");
-                    List<Product> products = new ArrayList<Product>();
+                    List<Product> products = new ArrayList<>();
 
                     JSONArray array = jsonObject.getJSONArray("products");
                     for(int i = 0; i < array.length(); i++){

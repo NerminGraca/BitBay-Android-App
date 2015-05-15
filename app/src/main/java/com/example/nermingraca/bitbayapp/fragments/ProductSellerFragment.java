@@ -30,7 +30,6 @@ public class ProductSellerFragment extends Fragment {
 
     public static final String PRODUCT_SELLER_FRAGMENT_KEY =
             "ba.nermin.bitcamp.product_seller_fragment_key";
-    private Button mViewUserButton;
 
 
     public ProductSellerFragment() {
@@ -44,7 +43,7 @@ public class ProductSellerFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_product_seller, container, false);
         Bundle arguments = getArguments();
-        int position = arguments.getInt(PRODUCT_SELLER_FRAGMENT_KEY);
+        //int position = arguments.getInt(PRODUCT_SELLER_FRAGMENT_KEY);
         String seller = arguments.getString("seller");
         String sellerAddress = arguments.getString("sellerAddress");
         double sellerRating = arguments.getDouble("sellerRating");
@@ -59,7 +58,7 @@ public class ProductSellerFragment extends Fragment {
         sellerAddressTV.setText(sellerAddress);
         sellerRatingTV.setText(sellerRatingString);
 
-        mViewUserButton = (Button) v.findViewById(R.id.view_user_button);
+        Button mViewUserButton = (Button) v.findViewById(R.id.view_user_button);
         mViewUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

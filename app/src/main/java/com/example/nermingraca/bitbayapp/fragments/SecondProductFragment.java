@@ -31,7 +31,6 @@ public class SecondProductFragment extends Fragment {
 
     public static final String SECOND_PRODUCT_FRAGMENT_KEY =
             "ba.nermin.bitcamp.second_product_fragment_key";
-    private Button mToCartButton;
 
 
     public SecondProductFragment() {
@@ -46,7 +45,7 @@ public class SecondProductFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_second_product, container, false);
 
         Bundle arguments = getArguments();
-        int position = arguments.getInt(SECOND_PRODUCT_FRAGMENT_KEY);
+        //int position = arguments.getInt(SECOND_PRODUCT_FRAGMENT_KEY);
         String description = arguments.getString("description");
         int quantity = arguments.getInt("quantity");
         String quantityText = "Available quantity: " + quantity;
@@ -59,7 +58,7 @@ public class SecondProductFragment extends Fragment {
         productDesc.setText(description);
         productQuantity.setText(quantityText);
 
-        mToCartButton = (Button) v.findViewById(R.id.view_to_cart_button);
+        Button mToCartButton = (Button) v.findViewById(R.id.view_to_cart_button);
         mToCartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

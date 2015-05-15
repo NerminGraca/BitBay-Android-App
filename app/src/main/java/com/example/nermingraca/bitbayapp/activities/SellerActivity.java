@@ -33,8 +33,6 @@ import java.util.List;
 
 public class SellerActivity extends ActionBarActivity {
 
-    private ListView mSellersProductList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +63,7 @@ public class SellerActivity extends ActionBarActivity {
             }
         }
 
-        mSellersProductList = (ListView)findViewById(R.id.sellersList);
+        ListView mSellersProductList = (ListView) findViewById(R.id.sellersList);
 
         CustomListAdapter productsAdapter = new CustomListAdapter
                 (this, userProducts);
@@ -75,7 +73,7 @@ public class SellerActivity extends ActionBarActivity {
         mSellersProductList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Product clicked = (Product)parent.getItemAtPosition(position);
+                Product clicked = (Product) parent.getItemAtPosition(position);
                 Intent intent = new Intent(SellerActivity.this, FragmentedProductActivity.class);
                 intent.putExtra("id", clicked.getmId());
                 intent.putExtra("name", clicked.getmName());
@@ -83,7 +81,7 @@ public class SellerActivity extends ActionBarActivity {
                 intent.putExtra("imagePath", clicked.getThumbnailUrl());
                 intent.putExtra("seller", clicked.getmOwner());
                 double priceDouble = clicked.getmPrice();
-                String price = String.format( "$" + "%.2f", priceDouble );
+                String price = String.format("$" + "%.2f", priceDouble);
                 intent.putExtra("price", price);
                 intent.putExtra("sellerId", clicked.getmSellerId());
                 intent.putExtra("quantity", clicked.getmQuantity());

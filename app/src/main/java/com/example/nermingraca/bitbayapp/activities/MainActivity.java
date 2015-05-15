@@ -88,6 +88,12 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    private void setUserData(String email, String password){
+        UserData userData = UserData.getInstance();
+        userData.setEmail(email);
+        userData.setPassword(password);
+    }
+
     private void loginUser(){
         String url = getString(R.string.service_login);
         Callback callback = loginVerification();
@@ -161,18 +167,11 @@ public class MainActivity extends ActionBarActivity {
         startActivity(posts);
     }
 
-    private void setUserData(String email, String password){
-        UserData userData = UserData.getInstance();
-        userData.setEmail(email);
-        userData.setPassword(password);
-    }
-
     public static void logout() {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.clear();
         editor.apply();
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

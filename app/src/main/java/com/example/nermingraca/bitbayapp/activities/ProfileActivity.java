@@ -35,8 +35,6 @@ import java.util.List;
 
 public class ProfileActivity extends ActionBarActivity {
 
-    private ListView mProfileProductList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +64,7 @@ public class ProfileActivity extends ActionBarActivity {
             }
         }
 
-        mProfileProductList = (ListView)findViewById(R.id.listOnProfile);
+        ListView mProfileProductList = (ListView) findViewById(R.id.listOnProfile);
 
         CustomListAdapter productsAdapter = new CustomListAdapter
                 (this, userProducts);
@@ -76,7 +74,7 @@ public class ProfileActivity extends ActionBarActivity {
         mProfileProductList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Product clicked = (Product)parent.getItemAtPosition(position);
+                Product clicked = (Product) parent.getItemAtPosition(position);
                 Intent intent = new Intent(ProfileActivity.this, ProductActivity.class);
                 intent.putExtra("id", clicked.getmId());
                 intent.putExtra("name", clicked.getmName());
@@ -84,7 +82,7 @@ public class ProfileActivity extends ActionBarActivity {
                 intent.putExtra("imagePath", clicked.getThumbnailUrl());
                 intent.putExtra("seller", clicked.getmOwner());
                 double priceDouble = clicked.getmPrice();
-                String price = String.format( "$" + "%.2f", priceDouble );
+                String price = String.format("$" + "%.2f", priceDouble);
                 intent.putExtra("price", price);
                 intent.putExtra("sellerId", clicked.getmSellerId());
                 startActivity(intent);

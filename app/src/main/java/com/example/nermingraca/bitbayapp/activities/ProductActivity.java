@@ -28,15 +28,13 @@ import java.io.IOException;
 
 public class ProductActivity extends ActionBarActivity {
 
-    private Button mViewUserButton;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
 
         Intent intent = getIntent();
-        int id = intent.getIntExtra("id", 0);
+        //int id = intent.getIntExtra("id", 0);
         String name = intent.getStringExtra("name");
         String description = intent.getStringExtra("description");
         String price = intent.getStringExtra("price");
@@ -57,7 +55,7 @@ public class ProductActivity extends ActionBarActivity {
         Picasso.with(getBaseContext()).load(imagePath).into(productImage);
         productSeller.setText(seller);
 
-        mViewUserButton = (Button) findViewById(R.id.view_user_button);
+        Button mViewUserButton = (Button) findViewById(R.id.view_user_button);
         mViewUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

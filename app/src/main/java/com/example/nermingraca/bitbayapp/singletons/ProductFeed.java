@@ -29,7 +29,7 @@ public class ProductFeed {
     private List<Product> mFeed;
 
     private ProductFeed() {
-        mFeed = new ArrayList<Product>();
+        mFeed = new ArrayList<>();
     }
 
     public void getFeed(String url){

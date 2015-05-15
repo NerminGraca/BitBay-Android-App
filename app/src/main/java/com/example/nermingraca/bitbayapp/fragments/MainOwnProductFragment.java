@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.nermingraca.bitbayapp.R;
-import com.example.nermingraca.bitbayapp.singletons.UserData;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -34,7 +33,7 @@ public class MainOwnProductFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_main_own_product, container, false);
 
         Bundle arguments = getArguments();
-        int position = arguments.getInt(MAIN_OWN_PRODUCT_FRAGMENT_KEY);
+        //int position = arguments.getInt(MAIN_OWN_PRODUCT_FRAGMENT_KEY);
         String imgPath = arguments.getString("imgPath");
         String name = arguments.getString("name");
         String price = arguments.getString("price");
