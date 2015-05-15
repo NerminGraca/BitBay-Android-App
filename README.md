@@ -4,6 +4,9 @@ Android version project BitBay, done by students of BitCamp Sarajevo 2015.
 
 Status: In development...
 
+** For now application is connected to bitbay.cloudapp.net **
+** Ignore the text below **
+
 In order to run this app, a Play Framework project "bitBayv1.0" is needed.
 "bitBayv1.0" can be found at this link:
 
