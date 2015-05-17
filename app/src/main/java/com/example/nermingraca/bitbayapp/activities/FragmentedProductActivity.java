@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +30,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 
-public class FragmentedProductActivity extends ActionBarActivity {
+public class FragmentedProductActivity extends AppCompatActivity {
 
     private int id;
     private String name;

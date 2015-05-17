@@ -2,7 +2,7 @@ package com.example.nermingraca.bitbayapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +31,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class SellerActivity extends ActionBarActivity {
+public class SellerActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class SellerActivity extends ActionBarActivity {
 
         List<Product> products = productFeed.getFeed();
 
-        List<Product> userProducts = new ArrayList<Product>();
+        List<Product> userProducts = new ArrayList<>();
         Iterator<Product> iterator = products.iterator();
         while (iterator.hasNext()) {
             Product temp = iterator.next();

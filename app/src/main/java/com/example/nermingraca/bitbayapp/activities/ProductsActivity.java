@@ -2,7 +2,7 @@ package com.example.nermingraca.bitbayapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -30,7 +30,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 
-public class ProductsActivity extends ActionBarActivity {
+public class ProductsActivity extends AppCompatActivity {
 
     private ListView mProductList;
 
